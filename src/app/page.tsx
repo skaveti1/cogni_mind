@@ -16,17 +16,19 @@ export default function Home() {
     <main className="min-h-screen bg-slate-950 text-slate-50 font-sans selection:bg-brand/30 selection:text-brand">
 
       {/* ── HERO ──────────────────────────────────────────────── */}
-      <section className="relative pt-36 pb-28 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(139,92,246,0.12),transparent)]" />
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent" />
+      <section className="relative pt-16 pb-20 px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(52,211,153,0.08),transparent)]" />
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent" />
 
         <div className="max-w-5xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 border border-brand/20 mb-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
-            <span className="text-xs text-brand font-bold tracking-widest uppercase">
-              Cogni Mind · AI Systems Architecture Advisory
-            </span>
-          </div>
+
+          {/* Mission statement */}
+          <p className="text-brand text-2xl md:text-3xl font-black mb-3 tracking-tight">
+            We automate your workflows.
+          </p>
+          <p className="text-slate-500 text-base md:text-lg font-medium mb-8">
+            Reduce manual work. Slash OpEx. Build AI systems that actually stick.
+          </p>
 
           <h1 className="text-6xl md:text-[88px] font-black tracking-tight mb-6 leading-[0.92]">
             From Manual Mess<br />
@@ -318,7 +320,7 @@ export default function Home() {
 
       {/* ── CTA ───────────────────────────────────────────────── */}
       <section className="py-28 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(139,92,246,0.10),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(52,211,153,0.07),transparent)]" />
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <p className="text-brand text-xs font-bold uppercase tracking-widest mb-5">Ready to start?</p>
           <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6 leading-[0.95]">

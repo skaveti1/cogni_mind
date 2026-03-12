@@ -1,23 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand: electric violet */
-  --color-brand: #8b5cf6;
-  --color-brand-hover: #7c3aed;
-  --color-brand-light: #ede9fe;
+  /* Brand: electric emerald — AI terminal / data / growth */
+  --color-brand: #34d399;
+  --color-brand-hover: #10b981;
+  --color-brand-light: #d1fae5;
 
-  /* Override dark slate backgrounds with deep purple-tinted values
-     so every bg-slate-950 / 900 / 800 gains the AI-native feel     */
-  --color-slate-950: #05050f;
-  --color-slate-900: #0b0a1e;
-  --color-slate-800: #15132e;
-  --color-slate-700: #221f44;
+  /* Neutral deep-black backgrounds (no purple tint) */
+  --color-slate-950: #060609;
+  --color-slate-900: #0e0e12;
+  --color-slate-800: #1a1a22;
+  --color-slate-700: #26263a;
 
   --font-sans: var(--font-inter), sans-serif;
 }
 
 body {
-  background: #05050f;
+  background: #060609;
   color: #f8fafc;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -25,27 +24,25 @@ body {
   min-height: 100vh;
 }
 
-/* Subtle dot-grid pattern — gives that "AI control panel" feel */
+/* Fixed dot-grid — subtle emerald, gives that AI-system / circuit feel */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image:
-    radial-gradient(circle, rgba(139, 92, 246, 0.12) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-image: radial-gradient(circle, rgba(52, 211, 153, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
   pointer-events: none;
   z-index: 0;
 }
 
-/* All page content sits above the grid */
 main {
   position: relative;
   z-index: 1;
 }
 
-/* Gradient headline — violet → fuchsia */
+/* Gradient headline — emerald → cyan */
 .text-gradient {
-  background: linear-gradient(135deg, #a78bfa 0%, #e879f9 60%, #f0abfc 100%);
+  background: linear-gradient(135deg, #34d399 0%, #22d3ee 60%, #a5f3fc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

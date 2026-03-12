@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {
   ArrowRight,
   BarChart2,
@@ -266,8 +267,14 @@ export default function Home() {
             {/* Shail */}
             <div className="bg-slate-900 rounded-2xl border border-slate-800 p-8">
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-14 h-14 rounded-full bg-brand/10 border border-brand/20 flex items-center justify-center text-brand font-black text-base flex-shrink-0">
-                  SK
+                <div className="w-14 h-14 rounded-full overflow-hidden border border-brand/20 shrink-0">
+                  <Image
+                    src="/shail-kaveti.jpg"
+                    alt="Shail Kaveti"
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <h3 className="text-xl font-black text-white">Shail Kaveti</h3>

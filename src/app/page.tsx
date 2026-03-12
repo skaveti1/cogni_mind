@@ -245,13 +245,17 @@ export default function Home() {
       </section>
 
       {/* ── ROADMAP ───────────────────────────────────────────── */}
-      <Roadmap />
+      <div id="how-it-works">
+        <Roadmap />
+      </div>
 
       {/* ── COMPARISON ────────────────────────────────────────── */}
-      <Comparison />
+      <div id="why-us">
+        <Comparison />
+      </div>
 
       {/* ── TEAM ──────────────────────────────────────────────── */}
-      <section className="py-24 bg-slate-950">
+      <section id="team" className="py-24 bg-slate-950">
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-14">
             <p className="text-brand text-xs font-bold uppercase tracking-widest mb-3">The Team</p>
@@ -319,7 +323,7 @@ export default function Home() {
       </section>
 
       {/* ── CTA ───────────────────────────────────────────────── */}
-      <section className="py-28 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+      <section id="contact" className="py-28 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(52,211,153,0.07),transparent)]" />
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <p className="text-brand text-xs font-bold uppercase tracking-widest mb-5">Ready to start?</p>

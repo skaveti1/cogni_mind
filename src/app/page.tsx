@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import Roadmap from '@/components/Roadmap';
 import Comparison from '@/components/Comparison';
+import ContactForm from '@/components/ContactForm';
 
 export default function Home() {
   return (
@@ -329,21 +330,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────── */}
-      <section id="contact" className="py-28 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(52,211,153,0.07),transparent)]" />
-        <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
-          <p className="text-brand text-xs font-bold uppercase tracking-widest mb-5">Ready to start?</p>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6 leading-[0.95]">
-            We design the blueprint.<br />Your team executes it.
-          </h2>
-          <p className="text-slate-400 mb-10 text-lg">
-            6-month engagement · $15,000/month · Measurable P&L impact or we haven&apos;t done our job.
-          </p>
-          <button className="group bg-brand hover:bg-brand-hover text-slate-950 font-black py-5 px-10 rounded-xl transition-all text-lg flex items-center justify-center gap-3 mx-auto">
-            Book a System Audit
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </button>
+      {/* ── CONTACT ───────────────────────────────────────────── */}
+      <section id="contact" className="py-24 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(52,211,153,0.06),transparent)]" />
+
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+
+            {/* Left — headline + trust signals */}
+            <div className="lg:pt-4">
+              <p className="text-brand text-xs font-bold uppercase tracking-widest mb-4">Ready to start?</p>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5 leading-[0.95]">
+                We design the blueprint.<br />
+                <span className="text-gradient">Your team executes it.</span>
+              </h2>
+              <p className="text-slate-400 text-lg mb-10 leading-relaxed">
+                6-month engagement · $15,000/month · Measurable P&L impact
+                or we haven&apos;t done our job.
+              </p>
+
+              {/* Trust bullets */}
+              <ul className="space-y-4">
+                {[
+                  { stat: '31%',   text: 'average reduction in manual work' },
+                  { stat: '$2.5M', text: 'in client cost savings delivered' },
+                  { stat: '24h',   text: 'response time guaranteed' },
+                ].map(({ stat, text }) => (
+                  <li key={stat} className="flex items-center gap-4">
+                    <span className="text-brand font-black text-xl tabular-nums w-14 shrink-0">{stat}</span>
+                    <span className="text-slate-400 text-sm">{text}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-10 pt-8 border-t border-slate-800">
+                <p className="text-slate-500 text-xs uppercase tracking-widest font-semibold mb-3">Or email us directly</p>
+                <a
+                  href="mailto:shail@cognimind.ai"
+                  className="text-brand font-semibold hover:underline underline-offset-4 text-sm"
+                >
+                  shail@cognimind.ai
+                </a>
+              </div>
+            </div>
+
+            {/* Right — form */}
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-8">
+              <h3 className="text-lg font-black text-white mb-1">Book a System Audit</h3>
+              <p className="text-slate-500 text-sm mb-6">Tell us what you&apos;re working with — we&apos;ll take it from there.</p>
+              <ContactForm />
+            </div>
+
+          </div>
         </div>
       </section>
 

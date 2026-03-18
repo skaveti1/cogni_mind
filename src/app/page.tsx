@@ -362,6 +362,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── FOOTER ────────────────────────────────────────────── */}
+      <footer className="border-t border-slate-800 bg-slate-950">
+        <div className="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-slate-600 text-sm">
+            © {new Date().getFullYear()} Cogni Mind. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6 text-xs text-slate-600">
+            <a href="mailto:shail@cognimind.ai" className="hover:text-brand transition-colors">
+              shail@cognimind.ai
+            </a>
+            <span className="w-px h-3 bg-slate-800" />
+            <a href="#contact" className="hover:text-brand transition-colors">
+              Book a System Audit
+            </a>
+          </div>
+        </div>
+      </footer>
+
     </main>
   );
 }

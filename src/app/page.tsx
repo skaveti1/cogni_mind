@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import {
-  ArrowRight,
   BarChart2,
   Target,
   Rocket,
@@ -12,6 +11,9 @@ import {
 import Roadmap from '@/components/Roadmap';
 import Comparison from '@/components/Comparison';
 import ContactForm from '@/components/ContactForm';
+import WorkflowAnimation from '@/components/WorkflowAnimation';
+import HeroContent from '@/components/HeroContent';
+import HeroTransform from '@/components/HeroTransform';
 
 export default function Home() {
   return (
@@ -22,44 +24,16 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(52,211,153,0.08),transparent)]" />
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent" />
 
-        <div className="max-w-5xl mx-auto text-center relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10">
+          <HeroContent />
+          <HeroTransform />
 
-          {/* Mission statement */}
-          <p className="text-brand text-2xl md:text-3xl font-black mb-3 tracking-tight">
-            We automate your workflows.
-          </p>
-          <p className="text-slate-500 text-base md:text-lg font-medium mb-8">
-            Reduce manual work. Slash OpEx. Build AI systems that actually stick.
-          </p>
-
-          <h1 className="text-6xl md:text-[88px] font-black tracking-tight mb-6 leading-[0.92]">
-            From Manual Mess<br />
-            <span className="text-gradient">to AI‑Automated</span><br />
-            Systems.
-          </h1>
-
-          <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-            We don&apos;t hand you a strategy deck and disappear. We architect your AI
-            transformation — and stay to ensure{' '}
-            <span className="text-white font-semibold">measurable P&L impact.</span>
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
-            <button className="group bg-brand hover:bg-brand-hover text-slate-950 font-bold py-4 px-8 rounded-xl transition-all flex items-center justify-center gap-2">
-              Start Your System Audit
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-white font-semibold py-4 px-8 rounded-xl transition-all">
-              See the Case Study
-            </button>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slate-500">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slate-500 mt-10">
             <span className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-brand" /> 40+ years combined experience
             </span>
             <span className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-brand" /> Amazon · Meta · L.E.K. · Goldman Sachs alumni
+              <CheckCircle2 className="w-4 h-4 text-brand" /> Amazon · Meta · Goldman Sachs alumni
             </span>
             <span className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-brand" /> $2.5M+ client savings delivered
@@ -185,6 +159,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── WORKFLOW ANIMATION ────────────────────────────────── */}
+      <WorkflowAnimation />
 
       {/* ── CASE STUDY ────────────────────────────────────────── */}
       <section className="py-24 bg-slate-900" id="case-study">

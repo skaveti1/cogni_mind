@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Orbitron } from "next/font/google";
 import "./globals.css";
 import Logo from "@/components/Logo";
+import CogniWordMark from "@/components/CogniWordMark";
+import Chatbot from "@/components/Chatbot";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  variable: "--font-orbitron",
+  weight: ["700", "900"],
+});
 
 export const metadata: Metadata = {
   title: "Cogni Mind · AI Systems Architecture Advisory",
@@ -17,21 +24,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.variable}>
+      <body className={`${inter.variable} ${orbitron.variable}`}>
 
         {/* ── Sticky Navbar ─────────────────────────────────── */}
-        <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between gap-6 px-6 py-3 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md">
+        <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between gap-6 px-6 py-2 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md">
 
           {/* Logo + wordmark */}
-          <a href="#" className="flex items-center gap-3 shrink-0">
-            <Logo size={36} />
-            <div className="leading-none">
-              <span className="block font-black text-white tracking-tight text-base">
-                COGNI MIND
-              </span>
-              <span className="block text-[10px] text-brand uppercase tracking-widest font-semibold mt-0.5">
-                AI Systems Architecture
-              </span>
+          <a
+            href="#"
+            className="flex items-center gap-3 shrink-0 group"
+          >
+            <div
+              className="transition-all group-hover:scale-105"
+              style={{ filter: 'drop-shadow(0 0 6px rgba(52,211,153,0.3))' }}
+            >
+              <Logo size={36} />
+            </div>
+            <div style={{ filter: 'drop-shadow(0 0 8px rgba(52,211,153,0.15))' }}>
+              <CogniWordMark />
             </div>
           </a>
 
@@ -66,6 +76,7 @@ export default function RootLayout({
         </header>
 
         {children}
+        <Chatbot />
       </body>
     </html>
   );

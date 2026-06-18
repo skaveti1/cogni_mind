@@ -44,12 +44,10 @@ export default function Home() {
 
       {/* ── METRICS BAR ───────────────────────────────────────── */}
       <section className="py-10 border-y border-slate-800 bg-slate-950">
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {[
             { value: '31%', label: 'Reduction in Manual Work' },
-            { value: '$2.5M', label: 'Client Cost Savings' },
-            { value: '$15K/mo', label: '6-Month Engagement' },
-            { value: '40+', label: 'Years Combined Exp.' },
+            { value: '$2.5M', label: 'Client Cost Savings' },            { value: '40+', label: 'Years Combined Exp.' },
           ].map(({ value, label }) => (
             <div key={label}>
               <p className="text-3xl md:text-4xl font-black text-brand mb-1 tabular-nums">{value}</p>
@@ -322,7 +320,7 @@ export default function Home() {
                 <span className="text-gradient">Your team executes it.</span>
               </h2>
               <p className="text-slate-400 text-lg mb-10 leading-relaxed">
-                6-month engagement · $15,000/month · Measurable P&L impact
+                6-month engagement · Measurable P&L impact
                 or we haven&apos;t done our job.
               </p>
 

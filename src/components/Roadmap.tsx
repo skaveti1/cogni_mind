@@ -61,14 +61,6 @@ export default function Roadmap() {
             </div>
           ))}
         </div>
-
-        {/* Pricing callout */}
-        <div className="mt-8 bg-brand/10 border border-brand/30 rounded-2xl p-6 text-center">
-          <p className="text-brand text-2xl font-black">6-Month Engagement: $15,000/month</p>
-          <p className="text-slate-400 text-sm mt-1">
-            100% principal attention · Custom-built for your workflows · End-to-end ownership
-          </p>
-        </div>
       </div>
     </section>
   );

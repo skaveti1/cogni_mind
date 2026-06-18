@@ -13,8 +13,9 @@ interface Message {
 // ── Pre-defined responses ──────────────────────────────────────────────────
 const RESPONSES = {
   pricing:
-    "Our engagement is **$15,000/month for 6 months**. That covers everything — system audit, AI architecture design, implementation oversight, and a full optimization phase. We've delivered $2.5M+ in client savings, so the ROI speaks for itself. Ready to see what's possible for your business?",
 
+
+"Our engagement covers everything — system audit, AI architecture design, implementation oversight, and a full optimization phase. We've delivered $2.5M+ in client savings, so the ROI speaks for itself. Pricing depends on scope, so let's talk — say 'get in touch' and we'll walk you through it.",
   services:
     "We help companies move from **manual, fragmented workflows to AI-automated systems** with measurable P&L impact. Specifically: (1) auditing every workflow across your departments, (2) designing agentic AI architectures, (3) overseeing implementation, and (4) tracking the cost savings. We make you AI-native — not just AI-curious.",
 

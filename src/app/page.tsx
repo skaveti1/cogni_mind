@@ -36,7 +36,7 @@ export default function Home() {
               <CheckCircle2 className="w-4 h-4 text-brand" /> Amazon · Wayfair · Trane alumni
             </span>
             <span className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-brand" /> 17 AI agents and automations shipped in six months
+              <CheckCircle2 className="w-4 h-4 text-brand" /> 17 AI agents shipped in six months
             </span>
           </div>
         </div>
@@ -214,7 +214,7 @@ export default function Home() {
                 </ul>
               </div>
               <p className="md:col-span-2 text-xs text-slate-500 pt-2 border-t border-slate-800">
-                Savings shown are audit estimates. The client is unnamed under confidentiality agreements.
+                Those savings figures are audit estimates, and we say so. Client agreements keep the name off this page.
               </p>
             </div>
           </div>
@@ -326,7 +326,7 @@ export default function Home() {
               {/* Trust bullets */}
               <ul className="space-y-4">
                 {[
-                  { stat: '17',  text: 'agents and automations shipped in six months' },
+                  { stat: '17',  text: 'agents shipped in six months' },
                   { stat: '5',   text: 'departments audited end to end' },
                   { stat: '24h', text: 'response time' },
                 ].map(({ stat, text }) => (

@@ -140,9 +140,9 @@ export default function WorkflowAnimation() {
         {/* Results bar */}
         <div className="mt-14 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
           {[
-            { value: '17',  label: 'Agents + automations shipped' },
+            { value: '17',  label: 'Agents shipped' },
             { value: '5',   label: 'Departments audited' },
-            { value: '6mo', label: 'Embedded with the client' },
+            { value: '6mo', label: 'Embedded on site' },
           ].map(({ value, label }) => (
             <div
               key={label}

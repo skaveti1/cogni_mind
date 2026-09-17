@@ -13,8 +13,8 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "Cogni Mind · AI Systems Architecture Advisory",
-  description: "From Manual Mess to AI-Automated Systems. We architect your AI transformation and stay to ensure measurable P&L impact.",
+  title: "Cognimind · An AI co-worker for manufacturers",
+  description: "Cognimind builds AI co-workers for manufacturers. They take the busywork. The decisions stay with your team.",
 };
 
 export default function RootLayout({
@@ -68,7 +68,7 @@ export default function RootLayout({
             href="#contact"
             className="shrink-0 inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-slate-950 font-bold text-sm py-2.5 px-5 rounded-lg transition-all"
           >
-            Book Audit
+            Get in touch
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>

@@ -140,9 +140,9 @@ export default function WorkflowAnimation() {
         {/* Results bar */}
         <div className="mt-14 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
           {[
-            { value: '31%',   label: 'Less manual work' },
-            { value: '$2.5M', label: 'Cost savings' },
-            { value: '6mo',   label: 'Full deployment' },
+            { value: '17',  label: 'Agents + automations shipped' },
+            { value: '5',   label: 'Departments audited' },
+            { value: '6mo', label: 'Embedded with the client' },
           ].map(({ value, label }) => (
             <div
               key={label}
@@ -160,10 +160,10 @@ export default function WorkflowAnimation() {
           <div className="flex-1 h-1.5 rounded-full bg-slate-800 overflow-hidden">
             <div
               className="h-full rounded-full bg-gradient-to-r from-brand to-cyan-400"
-              style={{ width: '73%', transition: 'width 1.5s ease' }}
+              style={{ width: '100%', transition: 'width 1.5s ease' }}
             />
           </div>
-          <span className="text-xs text-slate-400 font-semibold tabular-nums">73% automated</span>
+          <span className="text-xs text-slate-400 font-semibold">Workflow connected</span>
         </div>
       </div>
     </section>

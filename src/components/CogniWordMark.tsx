@@ -1,9 +1,11 @@
+// Cognimind wordmark: COGNI above a gradient rule, with MIND below.
+
 export default function CogniWordMark() {
   return (
     <svg
-      viewBox="0 0 142 40"
-      width="128"
-      height="36"
+      viewBox="0 0 116 52"
+      width="116"
+      height="52"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-label="Cognimind"
@@ -13,8 +15,15 @@ export default function CogniWordMark() {
           <stop offset="0%" stopColor="#34d399" />
           <stop offset="100%" stopColor="#22d3ee" />
         </linearGradient>
-        <filter id="wm-glow" x="-20%" y="-50%" width="140%" height="200%">
-          <feGaussianBlur stdDeviation="2" result="blur" />
+
+        <linearGradient id="wm-line" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#34d399" stopOpacity="0.9" />
+          <stop offset="70%" stopColor="#22d3ee" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
+        </linearGradient>
+
+        <filter id="wm-glow" x="-20%" y="-40%" width="140%" height="180%">
+          <feGaussianBlur stdDeviation="2.5" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
@@ -23,29 +32,32 @@ export default function CogniWordMark() {
       </defs>
 
       <text
-        x="2"
-        y="28"
-        fontSize="21"
+        x="3"
+        y="19"
+        fontSize="13"
         fontWeight="900"
         fill="white"
-        letterSpacing="1.2"
-        style={{ fontFamily: "var(--font-orbitron, 'Orbitron', monospace)" }}
+        letterSpacing="4.5"
+        style={{ fontFamily: "var(--font-orbitron, 'Orbitron', monospace)", opacity: 0.92 }}
       >
         COGNI
       </text>
+
+      <rect x="3" y="23.5" width="110" height="0.9" fill="url(#wm-line)" rx="0.4" />
+      <polygon points="3,23.5 6,21.5 9,23.5 6,25.5" fill="#34d399" opacity="0.8" />
+
       <text
-        x="72"
-        y="28"
-        fontSize="21"
+        x="12"
+        y="48"
+        fontSize="27"
         fontWeight="900"
         fill="url(#wm-main)"
-        letterSpacing="1.2"
+        letterSpacing="1"
         filter="url(#wm-glow)"
         style={{ fontFamily: "var(--font-orbitron, 'Orbitron', monospace)" }}
       >
         MIND
       </text>
-      <rect x="2" y="34" width="136" height="1" rx="0.5" fill="url(#wm-main)" opacity="0.65" />
     </svg>
   );
 }

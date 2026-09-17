@@ -20,7 +20,7 @@ export default function Home() {
     <main className="min-h-screen bg-slate-950 text-slate-50 font-sans selection:bg-brand/30 selection:text-brand">
 
       {/* ── HERO ──────────────────────────────────────────────── */}
-      <section className="relative pt-16 pb-20 px-6 overflow-hidden">
+      <section className="relative pt-24 md:pt-28 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(52,211,153,0.08),transparent)]" />
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent" />
 

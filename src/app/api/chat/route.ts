@@ -13,7 +13,7 @@ export async function POST(req: Request) {
   try {
     await resend.emails.send({
       from: 'Cognimind Chatbot <onboarding@resend.dev>',
-      to: 'shail@cognimind.ai',
+      to: 'hello@cognimind.ai',
       subject: 'New Chat Lead — Visitor wants to connect',
       html: `
         <div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;background:#060609;color:#f8fafc;padding:32px;border-radius:12px;border:1px solid #1a1a22;">

@@ -14,7 +14,7 @@ const rows = [
     them: 'Junior analysts learning on your dime',
   },
   {
-    us: 'End-to-end: blueprint to implementation',
+    us: 'End-to-end: audit through implementation',
     them: 'Leave unclear follow-ups to ensure repeat business',
   },
 ];
@@ -26,16 +26,16 @@ export default function Comparison() {
         <div className="mb-14">
           <p className="text-brand text-xs font-bold uppercase tracking-widest mb-3">Why Work With Us?</p>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-3">
-            We design the blueprint<br />and help your team execute.
+            We build it.<br />Your team keeps it.
           </h2>
-          <p className="text-slate-400">Your team retains the knowledge. We ensure it works.</p>
+          <p className="text-slate-400">You keep the IP and the knowledge. We make sure it runs.</p>
         </div>
 
         <div className="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden">
           {/* Header row */}
           <div className="grid grid-cols-2">
             <div className="p-5 bg-brand text-slate-950 border-r border-brand/50">
-              <p className="font-black text-sm uppercase tracking-widest">Cogni Mind</p>
+              <p className="font-black text-sm uppercase tracking-widest">Cognimind</p>
             </div>
             <div className="p-5 bg-slate-800">
               <p className="font-bold text-sm uppercase tracking-widest text-slate-400">Traditional Consulting Firms</p>
@@ -61,7 +61,7 @@ export default function Comparison() {
         </div>
 
         <p className="text-center text-slate-300 font-black italic text-xl mt-10">
-          We design the blueprint and help your team execute. Your team keeps the IP.
+          Most AI practitioners learned your world from a report. We ran it on the warehouse floor.
         </p>
       </div>
     </section>

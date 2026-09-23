@@ -13,23 +13,21 @@ interface Message {
 // ── Pre-defined responses ──────────────────────────────────────────────────
 const RESPONSES = {
   pricing:
-
-
-"Our engagement covers everything — system audit, AI architecture design, implementation oversight, and a full optimization phase. We've delivered $2.5M+ in client savings, so the ROI speaks for itself. Pricing depends on scope, so let's talk — say 'get in touch' and we'll walk you through it.",
+    "We start with one workflow. In the first two weeks, we walk the work, score the opportunity, and give you a build spec with a fixed price. If it isn't worth building, we'll say so before you spend more.",
   services:
-    "We help companies move from **manual, fragmented workflows to AI-automated systems** with measurable P&L impact. Specifically: (1) auditing every workflow across your departments, (2) designing agentic AI architectures, (3) overseeing implementation, and (4) tracking the cost savings. We make you AI-native — not just AI-curious.",
+    "Cognimind builds **AI co-workers for manufacturers**. They handle busywork such as preparing quotes, confirming orders, filing claims, parsing documents, and updating reports. The decisions stay with your team, inside the tools they already use.",
 
   process:
-    "Our 3-phase process:\n\n🔍 **Phase 1 (Wks 1–8):** System Audit & Strategy — we map every workflow, identify AI opportunities, and build an ROI framework.\n\n⚙️ **Phase 2 (Wks 9–16):** Architecture & Build — we design and oversee your agentic AI systems.\n\n📈 **Phase 3 (Wks 17–24):** Optimization & Handoff — we measure P&L impact and deliver your complete AI playbook.",
+    "Our process starts small and ships quickly:\n\n🔍 **Weeks 1–2: Walk the work** — we score one workflow on value, data readiness, and whether the team wants it changed.\n\n⚙️ **Weeks 3–10: Build and ship** — one system, one job, tested on your real volume.\n\n📈 **After that: The next one** — reusable parsing, integrations, and exception handling make the next workflow faster and cheaper.",
 
   team:
-    "Our team:\n\n**Shail Kaveti** — former Amazon & Wayfair Product Lead, Partner at TheFounderVC. Built global-scale AI personalization systems at Amazon.\n\n**Alex Gluck** — Meta FP&A Manager, former L.E.K. Consulting & Goldman Sachs. $225M closed at Mubadala GE Capital.\n\nCombined 40+ years of experience. MBA, Dartmouth (both).",
+    "Our team is made up of operators, not just advisors.\n\n**Shail Kaveti** — built US and EU B2B operations as employee #3 at Amazon Business, built Wayfair's residential AC business from zero to roughly $50M, and spent months working on warehouse floors.\n\n**Alex Gluck** — Meta FP&A Manager, former L.E.K. Consulting and Goldman Sachs.",
 
   results:
-    "Our flagship case study: a **major seafood company** achieved:\n\n✓ 31% reduction in manual work\n✓ 5 departments audited (Procurement, Sales, Supply Chain, Finance, HR)\n✓ $2.5M in verified cost savings\n✓ Positioned as AI-native ahead of their next funding round\n\nAll delivered in a single 6-month engagement.",
+    "We spent six months inside a **global food supply chain company** across North America, Europe, and India:\n\n✓ Audited five departments end to end\n✓ Shipped 17 AI agents and automations with their engineering team\n✓ Automated monthly reporting and built a live CEO view\n✓ Embedded the work in the systems their teams already use\n\nThe systems are still running and expanding. Savings shown are audit estimates, and the client is unnamed under confidentiality agreements.",
 
   contact:
-    "I'll notify the team that you're interested — we'll follow up within 24 hours! You can also book a System Audit directly on this page or email Shail at shail@cognimind.ai.",
+    "I'll notify the team that you're interested — we'll follow up within 24 hours. You can also tell us which workflow hurts most using the form on this page, or email Shail at shail@cognimind.ai.",
 
   default:
     "Great question! I can tell you about our **services, pricing, process, team,** or **results**. Or if you're ready to explore what AI automation could do for your business, just say 'get in touch' and I'll connect you with the team.",
@@ -55,7 +53,7 @@ function matchIntent(input: string): keyof typeof RESPONSES {
 
 const WELCOME: Message = {
   role: 'assistant',
-  content: "Hi! I'm the Cogni Mind assistant. Ask me anything about our AI transformation services, or pick a topic below.",
+  content: "Hi! I'm the Cognimind assistant. Ask me about our AI co-workers for manufacturers, or pick a topic below.",
 };
 
 // Render bold markdown (** **) as <strong>
@@ -93,8 +91,8 @@ export default function Chatbot() {
     const intent = matchIntent(userText);
     const responseText = RESPONSES[intent];
 
-    // Fake typing delay (700–1100ms)
-    const delay = 700 + Math.random() * 400;
+    // Short, consistent delay so the response feels conversational.
+    const delay = 850;
     setTyping(true);
     await new Promise(r => setTimeout(r, delay));
     setTyping(false);
@@ -103,7 +101,7 @@ export default function Chatbot() {
 
     // Contact intent — add CTA + fire notification email
     if (intent === 'contact') {
-      newMsg.cta = { label: 'Book a System Audit', href: '#contact' };
+      newMsg.cta = { label: 'Get in touch', href: '#contact' };
       fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -146,7 +144,7 @@ export default function Chatbot() {
               <Bot className="w-4 h-4 text-brand" />
             </div>
             <div className="flex-1">
-              <p className="text-white font-bold text-sm leading-none">Cogni Mind</p>
+              <p className="text-white font-bold text-sm leading-none">Cognimind</p>
               <span className="flex items-center gap-1.5 mt-0.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand" style={{ animation: 'pulse 2s ease infinite' }} />
                 <p className="text-brand text-[10px] font-semibold">Online · Replies instantly</p>

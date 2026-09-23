@@ -41,7 +41,7 @@ export default function ContactForm() {
           <CheckCircle2 className="w-8 h-8 text-brand" />
         </div>
         <h3 className="text-2xl font-black text-white mb-2">Message received!</h3>
-        <p className="text-slate-400 mb-6">We'll be in touch within 24 hours.</p>
+        <p className="text-slate-400 mb-6">We&apos;ll be in touch within 24 hours.</p>
         <button
           onClick={() => setStatus('idle')}
           className="text-brand text-sm font-semibold hover:underline underline-offset-4"
@@ -117,7 +117,7 @@ export default function ContactForm() {
       {status === 'error' && (
         <p className="text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
           Something went wrong. Email us directly at{' '}
-          <a href="mailto:shail@cognimind.ai" className="underline">shail@cognimind.ai</a>
+          <a href="mailto:hello@cognimind.ai" className="underline">hello@cognimind.ai</a>
         </p>
       )}
 
@@ -130,7 +130,7 @@ export default function ContactForm() {
         {status === 'loading' ? (
           <><Loader2 className="w-4 h-4 animate-spin" /> Sending…</>
         ) : (
-          <>Book Your System Audit <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></>
+          <>Send it over <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></>
         )}
       </button>
 

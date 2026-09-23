@@ -20,7 +20,7 @@ export default function Home() {
     <main className="min-h-screen bg-slate-950 text-slate-50 font-sans selection:bg-brand/30 selection:text-brand">
 
       {/* ── HERO ──────────────────────────────────────────────── */}
-      <section className="relative pt-16 pb-20 px-6 overflow-hidden">
+      <section className="relative pt-24 md:pt-28 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(52,211,153,0.08),transparent)]" />
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent" />
 
@@ -30,13 +30,13 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slate-500 mt-10">
             <span className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-brand" /> 40+ years combined experience
+              <CheckCircle2 className="w-4 h-4 text-brand" /> Operators, not advisors
             </span>
             <span className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-brand" /> Amazon · Meta · Goldman Sachs alumni
+              <CheckCircle2 className="w-4 h-4 text-brand" /> Amazon · Wayfair · Trane alumni
             </span>
             <span className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-brand" /> $2.5M+ client savings delivered
+              <CheckCircle2 className="w-4 h-4 text-brand" /> 17 AI agents shipped in six months
             </span>
           </div>
         </div>
@@ -46,8 +46,9 @@ export default function Home() {
       <section className="py-10 border-y border-slate-800 bg-slate-950">
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {[
-            { value: '31%', label: 'Reduction in Manual Work' },
-            { value: '$2.5M', label: 'Client Cost Savings' },            { value: '40+', label: 'Years Combined Exp.' },
+            { value: '17', label: 'AI agents and automations shipped' },
+            { value: '5', label: 'Departments audited end to end' },
+            { value: '6mo', label: 'Embedded with the client' },
           ].map(({ value, label }) => (
             <div key={label}>
               <p className="text-3xl md:text-4xl font-black text-brand mb-1 tabular-nums">{value}</p>
@@ -63,10 +64,10 @@ export default function Home() {
           <div className="mb-14">
             <p className="text-brand text-xs font-bold uppercase tracking-widest mb-3">The AI Imperative</p>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">
-              Three things every business<br />needs to get right.
+              Most AI projects die<br />because nobody uses them.
             </h2>
             <p className="text-slate-400 max-w-xl">
-              The gap between AI-native and AI-curious comes down to execution.
+              The software usually works. Getting people to use it is the hard part.
             </p>
           </div>
 
@@ -74,18 +75,18 @@ export default function Home() {
             {[
               {
                 icon: <BarChart2 className="w-6 h-6 text-brand" />,
-                title: 'Optimize',
-                sub: 'Automate workflows, reduce costs, and improve customer management across every department.',
+                title: 'Pick one workflow',
+                sub: 'We start where it costs you most, not where AI is easiest to demo.',
               },
               {
                 icon: <Target className="w-6 h-6 text-brand" />,
-                title: 'Strategize',
-                sub: 'Develop the strategy that will enable your company to become AI-native, not just AI-curious.',
+                title: 'Build it into their day',
+                sub: 'Nothing new to log into. It runs inside the tools your team already uses.',
               },
               {
                 icon: <Rocket className="w-6 h-6 text-brand" />,
-                title: 'Leverage',
-                sub: 'Ensure AI usage and adoption across the entire organization so it sticks.',
+                title: "Stop what doesn't pay",
+                sub: "Anything that isn't earning its keep, we stop. We'll tell you before you spend more.",
               },
             ].map(({ icon, title, sub }) => (
               <div
@@ -172,12 +173,10 @@ export default function Home() {
           <div className="bg-slate-950 rounded-2xl border border-brand/20 overflow-hidden">
             <div className="bg-brand/5 border-b border-brand/20 px-8 md:px-10 py-8">
               <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-2">
-                Reducing Manual Work by{' '}
-                <span className="text-brand">31%</span> at a Major Seafood Company
+                Six months inside a global food supply chain company
               </h2>
               <p className="text-slate-400">
-                Resulting in{' '}
-                <span className="text-white font-semibold">$2.5M in cost savings</span>
+                Embedded across North America, Europe and India
               </p>
             </div>
 
@@ -186,16 +185,14 @@ export default function Home() {
                 <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5">What We Did</h3>
                 <ul className="space-y-4">
                   {[
-                    { bold: '31% reduction', text: 'in manual work across procurement and sales' },
-                    { bold: '5 departments audited:', text: 'Procurement, Sales, Supply Chain, Finance, and HR' },
-                    { bold: '6-month roadmap', text: 'delivered integrating into Salesforce' },
-                    { bold: 'Agentic workflow architecture', text: 'designed for the engineering team to execute' },
-                  ].map(({ bold, text }) => (
-                    <li key={text} className="flex gap-3 text-sm text-slate-300">
+                    'Audited workflows end to end across five departments: procurement, sales, supply chain, finance, and HR',
+                    'Designed and shipped 17 AI agents and automations alongside their engineering team',
+                    'Embedded them in the systems their teams already use, across sales, procurement, finance, and operations',
+                    'Automated their monthly reporting and built a live view of the business for the CEO',
+                  ].map((item) => (
+                    <li key={item} className="flex gap-3 text-sm text-slate-300">
                       <CheckCircle2 className="w-4 h-4 text-brand mt-0.5 flex-shrink-0" />
-                      <span>
-                        <strong className="text-white">{bold}</strong> {text}
-                      </span>
+                      {item}
                     </li>
                   ))}
                 </ul>
@@ -205,9 +202,9 @@ export default function Home() {
                 <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5">The Outcome</h3>
                 <ul className="space-y-4">
                   {[
-                    'Productized workflows and investor pitch to Accel, Tiger Global, and other Tier 1 VCs',
-                    '$2.5M in verified cost savings through AI-automated workflows',
-                    'Company positioned as AI-native ahead of next funding round',
+                    'Still running and expanding across their entities today',
+                    'The audit projected around a third of manual work could be automated, with seven-figure annual savings',
+                    'Helped productize the workflows, which became part of their next funding conversation',
                   ].map((item) => (
                     <li key={item} className="flex gap-3 text-sm text-slate-300">
                       <CheckCircle2 className="w-4 h-4 text-brand mt-0.5 flex-shrink-0" />
@@ -216,6 +213,9 @@ export default function Home() {
                   ))}
                 </ul>
               </div>
+              <p className="md:col-span-2 text-xs text-slate-500 pt-2 border-t border-slate-800">
+                Those savings figures are audit estimates, and we say so. Client agreements keep the name off this page.
+              </p>
             </div>
           </div>
         </div>
@@ -255,16 +255,16 @@ export default function Home() {
                 <div>
                   <h3 className="text-xl font-black text-white">Shail Kaveti</h3>
                   <p className="text-brand text-sm font-semibold mt-0.5">
-                    Partner, TheFounderVC · Former Amazon & Wayfair Product Lead
+                    Operator · Amazon Business, Wayfair, Bill.com
                   </p>
                 </div>
               </div>
               <ul className="space-y-2.5">
                 {[
-                  'Built global-scale AI personalization systems from scratch at Amazon and Wayfair',
-                  'Product Lead: Growth strategy, monetization platforms (BILL, Amazon)',
-                  'Quantitative trading systems at Susquehanna and Bank of America',
-                  'MBA, Dartmouth · BS, Mathematics & CS (Drexel)',
+                  'Employee #3 at Amazon Business, building US and EU B2B operations',
+                  "Built Wayfair's residential AC business from zero to roughly $50M",
+                  'Months on warehouse floors at Amazon and Wayfair, receiving through shipping',
+                  'MBA, Tuck at Dartmouth · BS/MS Computer Science, Drexel',
                 ].map((item) => (
                   <li key={item} className="flex gap-2 text-slate-400 text-sm">
                     <span className="text-brand mt-1 flex-shrink-0">›</span>
@@ -316,20 +316,19 @@ export default function Home() {
             <div className="lg:pt-4">
               <p className="text-brand text-xs font-bold uppercase tracking-widest mb-4">Ready to start?</p>
               <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5 leading-[0.95]">
-                We design the blueprint.<br />
-                <span className="text-gradient">Your team executes it.</span>
+                Let&apos;s start with<br />
+                <span className="text-gradient">one workflow.</span>
               </h2>
               <p className="text-slate-400 text-lg mb-10 leading-relaxed">
-                6-month engagement · Measurable P&L impact
-                or we haven&apos;t done our job.
+                We&apos;ll walk it with you, score it, and tell you if it&apos;s worth building. No commitment. No deck at the end.
               </p>
 
               {/* Trust bullets */}
               <ul className="space-y-4">
                 {[
-                  { stat: '31%',   text: 'average reduction in manual work' },
-                  { stat: '$2.5M', text: 'in client cost savings delivered' },
-                  { stat: '24h',   text: 'response time guaranteed' },
+                  { stat: '17',  text: 'agents shipped in six months' },
+                  { stat: '5',   text: 'departments audited end to end' },
+                  { stat: '24h', text: 'response time' },
                 ].map(({ stat, text }) => (
                   <li key={stat} className="flex items-center gap-4">
                     <span className="text-brand font-black text-xl tabular-nums w-14 shrink-0">{stat}</span>
@@ -341,17 +340,17 @@ export default function Home() {
               <div className="mt-10 pt-8 border-t border-slate-800">
                 <p className="text-slate-500 text-xs uppercase tracking-widest font-semibold mb-3">Or email us directly</p>
                 <a
-                  href="mailto:shail@cognimind.ai"
+                  href="mailto:hello@cognimind.ai"
                   className="text-brand font-semibold hover:underline underline-offset-4 text-sm"
                 >
-                  shail@cognimind.ai
+                  hello@cognimind.ai
                 </a>
               </div>
             </div>
 
             {/* Right — form */}
             <div className="bg-slate-950 border border-slate-800 rounded-2xl p-8">
-              <h3 className="text-lg font-black text-white mb-1">Book a System Audit</h3>
+              <h3 className="text-lg font-black text-white mb-1">Tell us which workflow hurts most</h3>
               <p className="text-slate-500 text-sm mb-6">Tell us what you&apos;re working with — we&apos;ll take it from there.</p>
               <ContactForm />
             </div>
@@ -364,15 +363,15 @@ export default function Home() {
       <footer className="border-t border-slate-800 bg-slate-950">
         <div className="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-slate-600 text-sm">
-            © {new Date().getFullYear()} Cogni Mind. All rights reserved.
+            © {new Date().getFullYear()} Cognimind. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-xs text-slate-600">
-            <a href="mailto:shail@cognimind.ai" className="hover:text-brand transition-colors">
-              shail@cognimind.ai
+            <a href="mailto:hello@cognimind.ai" className="hover:text-brand transition-colors">
+              hello@cognimind.ai
             </a>
             <span className="w-px h-3 bg-slate-800" />
             <a href="#contact" className="hover:text-brand transition-colors">
-              Book a System Audit
+              Get in touch
             </a>
           </div>
         </div>

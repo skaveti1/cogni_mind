@@ -12,8 +12,8 @@ export async function POST(req: Request) {
 
   try {
     await resend.emails.send({
-      from: 'Cogni Mind <onboarding@resend.dev>',
-      to: 'shail@cognimind.ai',
+      from: 'Cognimind <onboarding@resend.dev>',
+      to: 'hello@cognimind.ai',
       replyTo: email,
       subject: `New Inquiry — ${name} at ${company}`,
       html: `
@@ -56,7 +56,7 @@ export async function POST(req: Request) {
           </div>
           ` : ''}
 
-          <a href="mailto:${email}?subject=Re: Your Cogni Mind inquiry"
+          <a href="mailto:${email}?subject=Re: Your Cognimind inquiry"
             style="display:inline-block;background:#34d399;color:#060609;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;text-decoration:none;">
             Reply to ${name}
           </a>

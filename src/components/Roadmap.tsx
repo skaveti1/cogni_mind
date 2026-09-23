@@ -1,25 +1,24 @@
 const phases = [
   {
     label: 'Phase I',
-    weeks: 'Weeks 1–8',
-    title: 'System Audit',
-    description: 'Map workflows, identify labor drains, build ROI framework.',
-    deliverable: 'Technical Systems Blueprint + OpEx impact model',
+    weeks: 'Weeks 1–2',
+    title: 'Walk the work',
+    description: "We walk the workflow with you and score it on three things: what it's worth, whether your data supports it, and whether the team wants it changed.",
+    deliverable: 'A build spec and a fixed price',
   },
   {
     label: 'Phase II',
-    weeks: 'Weeks 9–16',
-    title: 'Architecture Design',
-    description: 'Design agentic systems, define integration points, specify tooling.',
-    deliverable: 'Implementation-ready architecture specification',
+    weeks: 'Weeks 3–10',
+    title: 'Build and ship',
+    description: 'One system, one job, tested on your real volume. Your people are involved from the first week.',
+    deliverable: 'Software that is running, not a specification',
   },
   {
     label: 'Phase III',
-    weeks: 'Weeks 17–24',
-    title: 'Implementation Oversight',
-    description:
-      'We partner with your team — or bring ours — to implement and ensure architecture integrity.',
-    deliverable: 'Live AI systems with measurable P&L impact',
+    weeks: 'After that',
+    title: 'The next one',
+    description: 'The second build is faster and cheaper, because the parsing, integrations, and exception handling carry over.',
+    deliverable: 'A workflow you keep, and a lower price on the next',
   },
 ];
 
@@ -30,10 +29,10 @@ export default function Roadmap() {
         <div className="mb-14">
           <p className="text-brand text-xs font-bold uppercase tracking-widest mb-3">The Engagement</p>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-3">
-            We recommend a Six Month Roadmap
+            One workflow at a time
           </h2>
           <p className="text-slate-400 text-lg">
-            From Manual Mess to AI-Automated Systems, with full implementation oversight.
+            You see working software every week. If it isn&apos;t worth building, we say so before we start.
           </p>
         </div>
 

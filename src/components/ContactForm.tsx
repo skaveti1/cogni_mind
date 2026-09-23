@@ -117,7 +117,7 @@ export default function ContactForm() {
       {status === 'error' && (
         <p className="text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
           Something went wrong. Email us directly at{' '}
-          <a href="mailto:shail@cognimind.ai" className="underline">shail@cognimind.ai</a>
+          <a href="mailto:hello@cognimind.ai" className="underline">hello@cognimind.ai</a>
         </p>
       )}
 

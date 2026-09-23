@@ -13,7 +13,7 @@ export async function POST(req: Request) {
   try {
     await resend.emails.send({
       from: 'Cognimind <onboarding@resend.dev>',
-      to: 'shail@cognimind.ai',
+      to: 'hello@cognimind.ai',
       replyTo: email,
       subject: `New Inquiry — ${name} at ${company}`,
       html: `

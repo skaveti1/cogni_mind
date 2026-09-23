@@ -340,10 +340,10 @@ export default function Home() {
               <div className="mt-10 pt-8 border-t border-slate-800">
                 <p className="text-slate-500 text-xs uppercase tracking-widest font-semibold mb-3">Or email us directly</p>
                 <a
-                  href="mailto:shail@cognimind.ai"
+                  href="mailto:hello@cognimind.ai"
                   className="text-brand font-semibold hover:underline underline-offset-4 text-sm"
                 >
-                  shail@cognimind.ai
+                  hello@cognimind.ai
                 </a>
               </div>
             </div>
@@ -366,8 +366,8 @@ export default function Home() {
             © {new Date().getFullYear()} Cognimind. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-xs text-slate-600">
-            <a href="mailto:shail@cognimind.ai" className="hover:text-brand transition-colors">
-              shail@cognimind.ai
+            <a href="mailto:hello@cognimind.ai" className="hover:text-brand transition-colors">
+              hello@cognimind.ai
             </a>
             <span className="w-px h-3 bg-slate-800" />
             <a href="#contact" className="hover:text-brand transition-colors">

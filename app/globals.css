@@ -1,0 +1,348 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-canvas: #faf9f6;
+  --color-surface: #ffffff;
+  --color-elevated: #f2efe9;
+  --color-ink: #1a1815;
+  --color-ink-soft: #45413a;
+  --color-muted: #6f6a61;
+
+  --color-line: rgba(26, 24, 21, 0.12);
+  --color-line-strong: rgba(26, 24, 21, 0.24);
+
+  --color-accent: #211e1a;
+  --color-accent-hover: #3a352e;
+  --color-accent-soft: rgba(26, 24, 21, 0.06);
+
+  --color-amber: #8a5a2b;
+  --color-amber-soft: rgba(138, 90, 43, 0.10);
+  --color-forest: #14120f;
+  --color-forest-line: rgba(255, 255, 255, 0.12);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: color-mix(in oklab, var(--color-accent) 14%, transparent);
+  color: var(--color-ink);
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll reveal + stagger (only hides content when JS is available)  */
+/* ------------------------------------------------------------------ */
+@media (scripting: enabled) {
+  .reveal-el {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    filter: blur(6px);
+    transition:
+      opacity 0.65s var(--ease-out-soft),
+      transform 0.65s var(--ease-out-soft),
+      filter 0.65s var(--ease-out-soft);
+    will-change: opacity, transform;
+  }
+  .reveal-el[data-direction="left"] {
+    transform: translate3d(-20px, 0, 0);
+  }
+  .reveal-el[data-direction="right"] {
+    transform: translate3d(20px, 0, 0);
+  }
+  .reveal-el[data-direction="down"] {
+    transform: translate3d(0, -16px, 0);
+  }
+  .reveal-el[data-direction="none"] {
+    transform: none;
+    filter: none;
+  }
+  .reveal-el.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+
+  .stagger-item {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity 0.6s var(--ease-out-soft),
+      transform 0.6s var(--ease-out-soft);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+  .stagger.is-visible .stagger-item {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Brand mark: draw-on + wordmark reveal                               */
+/* ------------------------------------------------------------------ */
+.logo-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: logo-draw 0.9s var(--ease-out-soft) 0.1s forwards;
+}
+.logo-inner,
+.logo-node {
+  opacity: 0;
+  animation: logo-fade 0.5s ease 0.65s forwards;
+}
+.logo-node:nth-of-type(2) {
+  animation-delay: 0.8s;
+}
+.logo-node:nth-of-type(3) {
+  animation-delay: 0.95s;
+}
+
+.brand-word {
+  animation: brand-word-in 0.7s var(--ease-out-soft) 0.15s both;
+}
+
+@keyframes logo-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes logo-fade {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes brand-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Checkmark draw                                                      */
+/* ------------------------------------------------------------------ */
+.check-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.check-draw-auto {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: check-draw 0.6s var(--ease-out-soft) 0.2s forwards;
+}
+.reveal-el.is-visible .check-draw {
+  animation: check-draw 0.55s var(--ease-out-soft) 0.2s forwards;
+}
+.stagger.is-visible .check-draw {
+  animation: check-draw 0.55s var(--ease-out-soft)
+    calc(var(--i, 0) * 70ms + 120ms) forwards;
+}
+@keyframes check-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Scenes: full-bleed, hard-cut sections                               */
+/* ------------------------------------------------------------------ */
+.scene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-block: 5rem;
+}
+@media (min-width: 768px) {
+  .scene {
+    padding-block: 7rem;
+  }
+}
+@media (max-width: 767px) {
+  .scene {
+    min-height: auto;
+    padding-block: 4.5rem;
+  }
+}
+
+.scene-solid {
+  background-color: var(--color-canvas);
+}
+.scene-raised {
+  background-color: var(--color-surface);
+}
+.scene-atmospheric {
+  background-color: var(--color-canvas);
+}
+.scene-accent {
+  background-color: var(--color-elevated);
+}
+
+/* Dark photo bands (How It Works, Pilot, Case Study, Contact).
+   Every text token is a strong white so copy stays crisp over imagery. */
+.scene-media {
+  background-color: var(--color-forest);
+  --color-ink: #ffffff;
+  --color-ink-soft: #f4f5f7;
+  --color-muted: #e6e8ec;
+  --color-line: rgba(255, 255, 255, 0.18);
+  --color-line-strong: rgba(255, 255, 255, 0.32);
+  --color-accent: #ffffff;
+  --color-accent-hover: #ffffff;
+  --color-accent-soft: rgba(255, 255, 255, 0.10);
+}
+
+.scene-stack {
+  position: sticky;
+  top: 0;
+}
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  .scene-stack {
+    position: relative;
+    top: auto;
+  }
+}
+
+/* The first section sits below the sticky header, so it should fill the
+   viewport minus the header height to keep its content vertically centered. */
+.scene-hero {
+  padding-block: 3.5rem;
+}
+@media (min-width: 768px) {
+  .scene-hero {
+    min-height: calc(100svh - 68px);
+    padding-block: 3rem;
+  }
+}
+
+/* Dark band card surface */
+.band-card {
+  border: 1px solid var(--color-line);
+  background-color: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+}
+
+/* Re-assert the light palette for cards nested inside a dark photo band */
+.theme-light {
+  --color-canvas: #faf9f6;
+  --color-surface: #ffffff;
+  --color-elevated: #f2efe9;
+  --color-ink: #1a1815;
+  --color-ink-soft: #45413a;
+  --color-muted: #6f6a61;
+  --color-line: rgba(26, 24, 21, 0.12);
+  --color-line-strong: rgba(26, 24, 21, 0.24);
+  --color-accent: #211e1a;
+  --color-accent-hover: #3a352e;
+  --color-accent-soft: rgba(26, 24, 21, 0.06);
+}
+
+/* ------------------------------------------------------------------ */
+/* Micro-interactions                                                  */
+/* ------------------------------------------------------------------ */
+.lift {
+  transition:
+    transform 0.18s var(--ease-out-soft),
+    border-color 0.18s ease,
+    background-color 0.18s ease;
+}
+@media (hover: hover) {
+  .lift:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-line-strong);
+    background-color: var(--color-elevated);
+  }
+}
+
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--color-accent);
+  transition: transform 0.2s var(--ease-out-soft);
+}
+@media (hover: hover) {
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.btn-shift svg {
+  transition: transform 0.18s var(--ease-out-soft);
+}
+@media (hover: hover) {
+  .btn-shift:hover svg {
+    transform: translateX(3px);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion                                                      */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal-el,
+  .stagger-item {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  .logo-draw {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+  .logo-inner,
+  .logo-node {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  .brand-word {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+  .check-draw,
+  .check-draw-auto {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+  .lift:hover {
+    transform: none !important;
+  }
+}

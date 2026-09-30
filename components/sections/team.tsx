@@ -15,7 +15,7 @@ export function Team() {
         </div>
       </Reveal>
 
-      <Stagger className="mt-14 grid gap-8 md:grid-cols-2">
+      <Stagger className="mx-auto mt-14 grid w-full max-w-2xl gap-8">
         {team.members.map((member, index) => (
           <article
             key={member.name}

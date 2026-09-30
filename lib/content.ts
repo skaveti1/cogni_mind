@@ -235,18 +235,6 @@ export const team = {
         "MBA, Tuck at Dartmouth · BS/MS Computer Science, Drexel",
       ],
     },
-    {
-      name: "Alex Gluck",
-      role: "Marketing FP&A Manager, Meta · Former L.E.K. Consulting",
-      initials: "AG",
-      photo: "",
-      points: [
-        "Meta FP&A Manager · PepsiCo Sr. Manager, Sales Finance & Beverage Strategy",
-        "Senior Consultant, L.E.K.: Due diligence & growth strategy across healthcare, PE, consumer",
-        "$225M closed (97.5% approval rate) at Mubadala GE Capital",
-        "MBA, Dartmouth · Former JPMorgan, Goldman Sachs",
-      ],
-    },
   ],
 };
 

@@ -28,7 +28,8 @@ export function Hero() {
 
           <Reveal delay={160}>
             <p className="mx-auto mt-2 max-w-xl text-[0.9rem] leading-relaxed text-muted sm:text-[0.95rem] lg:mx-0">
-              {hero.subtitle}
+              {hero.subtitle}{" "}
+              <strong className="font-bold text-ink">{hero.subtitleEmphasis}</strong>
             </p>
           </Reveal>
 

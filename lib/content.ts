@@ -3,7 +3,8 @@ export const hero = {
   title: "AI agents that do the work you thought was impossible",
   statement: "The decisions stay with your team.",
   subtitle:
-    "Quotes out in hours. Orders confirmed the same day. Stock checked as it comes off the truck. Same headcount.",
+    "Quotes out in hours. Orders confirmed the same day. Stock checked as it comes off the truck.",
+  subtitleEmphasis: "Same headcount.",
   actions: [
     { label: "Start with one workflow", href: "#contact", variant: "primary" as const },
     { label: "See how it works", href: "#how-it-works", variant: "secondary" as const },

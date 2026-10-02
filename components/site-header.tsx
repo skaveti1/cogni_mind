@@ -21,7 +21,7 @@ export function SiteHeader() {
       <ScrollProgress />
       <div className="mx-auto flex h-[68px] w-full max-w-6xl items-center justify-between gap-6 px-6 md:px-8">
         <Link
-          href="#top"
+          href="/#top"
           aria-label="Cognimind home"
           onClick={() => setOpen(false)}
         >
@@ -41,7 +41,7 @@ export function SiteHeader() {
         </nav>
 
         <Link
-          href="#contact"
+          href="/#contact"
           className="hidden rounded-full bg-accent px-5 py-2.5 font-mono text-[0.72rem] uppercase tracking-[0.12em] text-canvas transition-colors hover:bg-accent-hover md:inline-flex"
         >
           Get in touch
@@ -101,7 +101,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              href="#contact"
+              href="/#contact"
               onClick={() => setOpen(false)}
               className="mt-5 inline-flex justify-center rounded-full bg-accent px-5 py-3 font-mono text-[0.72rem] uppercase tracking-[0.12em] text-canvas"
             >

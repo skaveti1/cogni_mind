@@ -8,12 +8,13 @@ export function SiteFooter() {
       <div className="relative mx-auto w-full max-w-6xl px-6 py-14 md:px-8">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
-            <Link href="#top" aria-label="Cognimind home" className="text-white">
+            <Link href="/#top" aria-label="Cognimind home" className="text-white">
               <Brand className="text-white" markClassName="text-white" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/55">
-              AI co-workers for industrial distributors. They take the
-              busywork. The decisions stay with your team.
+              AI co-workers for manufacturers and distributors. One workflow at
+              a time — the AI takes the busywork. The decisions stay with your
+              team.
             </p>
           </div>
 
@@ -28,7 +29,7 @@ export function SiteFooter() {
               {site.email}
             </a>
             <Link
-              href="#contact"
+              href="/#contact"
               className="text-sm text-white/65 transition-colors hover:text-white"
             >
               Start a conversation

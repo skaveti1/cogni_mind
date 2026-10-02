@@ -1,21 +1,25 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
-import { Eyebrow, Scene, SectionTitle } from "@/components/ui";
+import { Scene, SectionTitle } from "@/components/ui";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger } from "@/components/motion/stagger";
-import { team } from "@/lib/content";
+import { LogoMarquee } from "@/components/graphics/logo-marquee";
+import { background, team } from "@/lib/content";
 
 export function Team() {
   return (
     <Scene id="team" tone="solid">
       <Reveal>
         <div className="max-w-2xl">
-          <Eyebrow index="07">{team.eyebrow}</Eyebrow>
           <SectionTitle>{team.title}</SectionTitle>
         </div>
       </Reveal>
 
-      <Stagger className="mx-auto mt-14 grid w-full max-w-2xl gap-8">
+      <Reveal delay={60} className="mt-10">
+        <LogoMarquee brands={background.brands} />
+      </Reveal>
+
+      <Stagger className="mx-auto mt-12 grid w-full max-w-2xl gap-8">
         {team.members.map((member, index) => (
           <article
             key={member.name}

@@ -3,14 +3,13 @@ export const site = {
   url: "https://www.cognimind.ai",
   email: "inquiries@cognimind.ai",
   description:
-    "Cognimind builds AI co-workers for industrial distributors and companies growing by acquisition. It starts with one clean parts catalog; the decisions stay with your team.",
-  tagline: "An AI co-worker for industrial distributors",
+    "Cognimind builds AI co-workers for manufacturers and distributors. One workflow at a time — the AI handles the busywork, the decisions stay with your team.",
+  tagline: "An AI co-worker that takes the busywork",
   formspreeId: process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "",
 } as const;
 
 export const nav = [
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Case study", href: "#case-study" },
-  { label: "Why us", href: "#why-us" },
-  { label: "Team", href: "#team" },
+  { label: "How it works", href: "/#how-it-works" },
+  { label: "Why us", href: "/#why-us" },
+  { label: "Team", href: "/#team" },
 ] as const;

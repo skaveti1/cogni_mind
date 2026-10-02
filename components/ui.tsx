@@ -66,12 +66,14 @@ export function SceneCard({
 export function Eyebrow({
   children,
   index,
+  className = "mb-5",
 }: {
   children: ReactNode;
   index?: string;
+  className?: string;
 }) {
   return (
-    <div className="mb-5 flex items-center gap-3">
+    <div className={`${className} flex items-center gap-3`}>
       {index ? (
         <span className="inline-flex h-7 min-w-[1.75rem] items-center justify-center rounded-full border border-line-strong px-2 font-mono text-[0.65rem] tracking-[0.1em] text-ink-soft">
           {index}

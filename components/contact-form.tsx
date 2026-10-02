@@ -146,6 +146,8 @@ export function ContactForm() {
           />
         </label>
 
+        <input type="hidden" name="_subject" value="New enquiry from cognimind.ai" />
+
         <input
           type="text"
           name="_gotcha"

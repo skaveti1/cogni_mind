@@ -14,7 +14,7 @@ export function Contact() {
     >
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <Eyebrow index="08">{contact.eyebrow}</Eyebrow>
+          <Eyebrow index="04">{contact.eyebrow}</Eyebrow>
           <SectionTitle>{contact.title}</SectionTitle>
           <p className="mt-5 max-w-md text-lg leading-relaxed text-ink-soft">
             {contact.body}

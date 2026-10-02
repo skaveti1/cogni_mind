@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Cognimind — An AI co-worker for industrial distributors";
+export const alt =
+  "Cognimind — An AI for manufacturers and distributors that does the tasks you thought were impossible";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -51,14 +52,15 @@ export default function OpengraphImage() {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
-              fontSize: 72,
+              fontSize: 56,
               fontWeight: 700,
               color: "#1a1815",
-              lineHeight: 1.08,
+              lineHeight: 1.1,
               letterSpacing: "-0.02em",
             }}
           >
-            An AI co-worker for industrial distributors
+            An AI for manufacturers and distributors that does the tasks you
+            thought were impossible
           </div>
           <div style={{ marginTop: 26, fontSize: 34, color: "#45413a" }}>
             It takes the busywork. The decisions stay with your team.

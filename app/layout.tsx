@@ -4,7 +4,6 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site";
-import { team } from "@/lib/content";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,7 +15,6 @@ const newsreader = Newsreader({
   subsets: ["latin"],
   variable: "--font-newsreader",
   display: "swap",
-  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
 });
 
@@ -30,7 +28,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Cognimind — An AI co-worker that takes the busywork",
+    default: "Cognimind — An AI for manufacturers and distributors that does the tasks you thought were impossible",
     template: "%s · Cognimind",
   },
   description: site.description,
@@ -47,13 +45,13 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: "Cognimind — An AI co-worker that takes the busywork",
+    title: "Cognimind — An AI for manufacturers and distributors that does the tasks you thought were impossible",
     description: site.description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cognimind — An AI co-worker that takes the busywork",
+    title: "Cognimind — An AI for manufacturers and distributors that does the tasks you thought were impossible",
     description: site.description,
   },
   robots: {
@@ -84,11 +82,6 @@ const organizationSchema = {
     "Workflow automation",
     "Operations strategy",
   ],
-  employee: team.members.map((member) => ({
-    "@type": "Person",
-    name: member.name,
-    jobTitle: member.role,
-  })),
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "sales",

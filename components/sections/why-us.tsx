@@ -2,7 +2,8 @@ import type { CSSProperties } from "react";
 import { Eyebrow, Scene, SectionTitle } from "@/components/ui";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger } from "@/components/motion/stagger";
-import { whyUs } from "@/lib/content";
+import { LogoMarquee } from "@/components/graphics/logo-marquee";
+import { brands, whyUs } from "@/lib/content";
 
 export function WhyUs() {
   return (
@@ -31,6 +32,10 @@ export function WhyUs() {
           </div>
         ))}
       </Stagger>
+
+      <Reveal delay={80} className="mt-16">
+        <LogoMarquee brands={brands.items} />
+      </Reveal>
     </Scene>
   );
 }

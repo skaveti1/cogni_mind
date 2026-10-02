@@ -7,8 +7,16 @@ export const hero = {
   subtitleEmphasis: "Same headcount.",
   actions: [
     { label: "Start with one workflow", href: "#contact", variant: "primary" as const },
-    { label: "See how it works", href: "#how-it-works", variant: "secondary" as const },
   ],
+};
+
+export const receiving = {
+  eyebrow: "A day in the life of a receiving clerk",
+  title: "See how the AI co-worker helps.",
+  body: "A truck arrives. The AI co-worker checks every line against the order before it leaves the dock.",
+  image: "/screenshots/table_dashboard.png",
+  imageAlt:
+    "Example receiving dashboard showing a delivery from Northside Supply against PO-4418, with lines that match the order and two flagged for the team to review.",
 };
 
 export const howItWorks = {
@@ -112,38 +120,29 @@ export const whyUs = {
 export type Brand = {
   name: string;
   logo?: string;
+  logoWhite?: string;
 };
 
-export const background = {
-  brands: [
-    { name: "Amazon", logo: "/logos/amazon.png" },
-    { name: "Wayfair", logo: "/logos/wayfair.png" },
-    { name: "Trane", logo: "/logos/trane.png" },
-    { name: "Corning", logo: "/logos/corning.png" },
-    { name: "Hubbell", logo: "/logos/hubbell.png" },
-    { name: "SIG", logo: "/logos/sig.png" },
-    { name: "Dartmouth", logo: "/logos/dartmouth.png" },
-    { name: "Duke", logo: "/logos/duke.png" },
-  ] satisfies Brand[],
-};
-
-export const team = {
-  eyebrow: "The team",
-  title: "Operators. Not just advisors.",
-  members: [
+export const brands = {
+  items: [
+    { name: "Amazon", logo: "/logos/amazon.png", logoWhite: "/logos/white/amazon.png" },
+    { name: "Wayfair", logo: "/logos/wayfair.png", logoWhite: "/logos/white/wayfair.png" },
+    { name: "Trane", logo: "/logos/trane.png", logoWhite: "/logos/white/trane.png" },
+    { name: "Corning", logo: "/logos/corning.png", logoWhite: "/logos/white/corning.png" },
+    { name: "Hubbell", logo: "/logos/hubbell.png", logoWhite: "/logos/white/hubbell.png" },
     {
-      name: "Shail Kaveti",
-      role: "CEO",
-      initials: "SK",
-      photo: "/team/shail.webp",
-      points: [
-        "Employee #3 at Amazon Business, building US and EU B2B operations",
-        "Built Wayfair's residential AC business from zero to roughly $50M",
-        "Months on warehouse floors at Amazon and Wayfair, receiving through shipping",
-        "MBA, Tuck at Dartmouth · BS/MS Computer Science, Drexel",
-      ],
+      name: "Liebherr Group",
+      logo: "/logos/liebherr.png",
+      logoWhite: "/logos/white/liebherr.png",
     },
-  ],
+    {
+      name: "Susquehanna International Group",
+      logo: "/logos/susquehanna.png",
+      logoWhite: "/logos/white/susquehanna.png",
+    },
+    { name: "Dartmouth", logo: "/logos/dartmouth.png", logoWhite: "/logos/white/dartmouth.png" },
+    { name: "Duke", logo: "/logos/duke.png", logoWhite: "/logos/white/duke.png" },
+  ] satisfies Brand[],
 };
 
 export const contact = {

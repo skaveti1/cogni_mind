@@ -6,7 +6,6 @@ export const site = {
     "Cognimind builds AI co-workers for manufacturers and distributors. One workflow at a time — the AI handles the busywork, the decisions stay with your team.",
   tagline:
     "An AI for manufacturers and distributors that does the tasks you thought were impossible",
-  formspreeId: process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "xvkzpjyk",
 } as const;
 
 export const nav = [

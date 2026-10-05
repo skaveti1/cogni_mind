@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { contact } from "@/lib/content";
+import { isPersonalEmail, workEmailMessage } from "@/lib/email";
 import { site } from "@/lib/site";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -9,24 +10,43 @@ type Status = "idle" | "submitting" | "success" | "error";
 const fieldClass =
   "w-full rounded-xl border border-line bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/70 transition-colors focus:border-accent/40 focus:bg-surface focus:outline-none focus:ring-2 focus:ring-accent/10";
 
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [emailError, setEmailError] = useState<string | null>(null);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
+
+    const email = String(new FormData(form).get("email") ?? "");
+    if (isPersonalEmail(email)) {
+      setEmailError(workEmailMessage);
+      form.querySelector<HTMLInputElement>('input[name="email"]')?.focus();
+      return;
+    }
+    setEmailError(null);
+
     setStatus("submitting");
 
     try {
-      const response = await fetch(
-        `https://formspree.io/f/${site.formspreeId}`,
-        {
-          method: "POST",
-          body: new FormData(form),
-          headers: { Accept: "application/json" },
-        },
-      );
-      if (!response.ok) throw new Error("Request failed");
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: new FormData(form),
+      });
+
+      if (!response.ok) {
+        // 422 is the work-email rule; show it on the field, not as a send error.
+        const { error } = await response.json().catch(() => ({ error: null }));
+        if (response.status === 422) {
+          setEmailError(error ?? workEmailMessage);
+          setStatus("idle");
+          form.querySelector<HTMLInputElement>('input[name="email"]')?.focus();
+          return;
+        }
+        throw new Error("Request failed");
+      }
+
       setStatus("success");
       form.reset();
     } catch {
@@ -112,8 +132,18 @@ export function ContactForm() {
               name="email"
               required
               autoComplete="email"
-              className={fieldClass}
+              aria-invalid={emailError ? true : undefined}
+              aria-describedby={emailError ? "email-error" : undefined}
+              onChange={() => emailError && setEmailError(null)}
+              className={`${fieldClass} ${
+                emailError ? "border-red-500/70 focus:border-red-500/70" : ""
+              }`}
             />
+            {emailError ? (
+              <span id="email-error" className="mt-1.5 block text-xs text-red-600">
+                {emailError}
+              </span>
+            ) : null}
           </label>
           <label className="block">
             <span className="mb-1.5 block text-xs font-medium text-ink-soft">

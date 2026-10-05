@@ -34,7 +34,7 @@ export function WhyUs() {
       </Stagger>
 
       <Reveal delay={80} className="mt-16">
-        <p className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ink-soft">
+        <p className="font-mono text-base font-medium tracking-[0.08em] text-ink">
           Our Background
         </p>
         <div className="mt-5">

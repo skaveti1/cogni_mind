@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { contact } from "@/lib/content";
 import { isPersonalEmail, workEmailMessage } from "@/lib/email";
 import { site } from "@/lib/site";
@@ -14,6 +14,12 @@ const fieldClass =
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
+  const mountedAt = useRef<number | null>(null);
+
+  useEffect(() => {
+    mountedAt.current = Date.now();
+  }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -27,23 +33,36 @@ export function ContactForm() {
     }
     setEmailError(null);
 
+    setFormError(null);
     setStatus("submitting");
 
     try {
+      const body = new FormData(form);
+      body.set("_t", String(mountedAt.current ?? 0));
+
       const response = await fetch("/api/contact", {
         method: "POST",
-        body: new FormData(form),
+        body,
       });
 
       if (!response.ok) {
-        // 422 is the work-email rule; show it on the field, not as a send error.
-        const { error } = await response.json().catch(() => ({ error: null }));
-        if (response.status === 422) {
+        const { error, field } = await response
+          .json()
+          .catch(() => ({ error: null, field: null }));
+
+        // Field-scoped rejections belong on the input, not the send error slot.
+        if (field === "email") {
           setEmailError(error ?? workEmailMessage);
           setStatus("idle");
           form.querySelector<HTMLInputElement>('input[name="email"]')?.focus();
           return;
         }
+
+        setFormError(
+          response.status === 429
+            ? "Too many submissions. Please try again shortly."
+            : null,
+        );
         throw new Error("Request failed");
       }
 
@@ -182,7 +201,7 @@ export function ContactForm() {
 
         {status === "error" ? (
           <p className="text-sm text-red-600">
-            Something went wrong. Please email {site.email} instead.
+            {formError ?? `Something went wrong. Please email ${site.email} instead.`}
           </p>
         ) : null}
 

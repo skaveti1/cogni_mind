@@ -2,8 +2,7 @@ import { Eyebrow, Scene, SectionTitle } from "@/components/ui";
 import { SceneBackdrop } from "@/components/background/scene-backdrop";
 import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/motion/reveal";
-import { LogoMarquee } from "@/components/graphics/logo-marquee";
-import { brands, contact } from "@/lib/content";
+import { contact } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export function Contact() {
@@ -36,12 +35,6 @@ export function Contact() {
           </div>
         </Reveal>
       </div>
-
-      <Reveal delay={160} className="mt-16">
-        <div className="rounded-2xl border border-line bg-black/30 px-5 py-6 backdrop-blur-md sm:px-8">
-          <LogoMarquee brands={brands.items} tone="onDark" />
-        </div>
-      </Reveal>
     </Scene>
   );
 }

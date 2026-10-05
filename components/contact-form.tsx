@@ -1,11 +1,28 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Script from "next/script";
 import { contact } from "@/lib/content";
 import { isPersonalEmail, workEmailMessage } from "@/lib/email";
 import { site } from "@/lib/site";
 
 type Status = "idle" | "submitting" | "success" | "error";
+
+declare global {
+  interface Window {
+    turnstile?: { reset: (widget?: string) => void };
+  }
+}
+
+// Absent until the key is configured, in which case no widget renders and the
+// route skips verification — the form keeps working either way.
+const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+// Turnstile tokens are single use, so the widget needs a fresh one after any
+// outcome that leaves the form on screen.
+function resetTurnstile() {
+  window.turnstile?.reset();
+}
 
 const fieldClass =
   "w-full rounded-xl border border-line bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/70 transition-colors focus:border-accent/40 focus:bg-surface focus:outline-none focus:ring-2 focus:ring-accent/10";
@@ -54,6 +71,7 @@ export function ContactForm() {
         if (field === "email") {
           setEmailError(error ?? workEmailMessage);
           setStatus("idle");
+          resetTurnstile();
           form.querySelector<HTMLInputElement>('input[name="email"]')?.focus();
           return;
         }
@@ -69,6 +87,7 @@ export function ContactForm() {
       setStatus("success");
       form.reset();
     } catch {
+      resetTurnstile();
       setStatus("error");
     }
   }
@@ -203,6 +222,20 @@ export function ContactForm() {
           <p className="text-sm text-red-600">
             {formError ?? `Something went wrong. Please email ${site.email} instead.`}
           </p>
+        ) : null}
+
+        {turnstileSiteKey ? (
+          <>
+            <Script
+              src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+              strategy="afterInteractive"
+            />
+            <div
+              className="cf-turnstile"
+              data-sitekey={turnstileSiteKey}
+              data-theme="light"
+            />
+          </>
         ) : null}
 
         <button

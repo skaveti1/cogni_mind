@@ -10,6 +10,33 @@ const allowedFields = ["name", "company", "email", "phone", "message"] as const;
 
 const maxFieldLength = 5000;
 
+// Cloudflare Turnstile. Unset secret => verification is skipped entirely, so
+// the form keeps working before the keys are configured. Setting the secret in
+// the environment is what switches enforcement on; no redeploy of this file is
+// needed beyond the env change.
+const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+const turnstileVerifyUrl =
+  "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+
+async function passesTurnstile(token: string, ip: string) {
+  const body = new URLSearchParams({ secret: turnstileSecret!, response: token });
+  if (ip !== "unknown") body.set("remoteip", ip);
+
+  try {
+    const verified = await fetch(turnstileVerifyUrl, {
+      method: "POST",
+      body,
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+    });
+    const outcome = (await verified.json()) as { success?: boolean };
+    return outcome.success === true;
+  } catch {
+    // Cloudflare unreachable. Fail closed: an unverifiable submission is
+    // exactly what this check exists to stop.
+    return false;
+  }
+}
+
 // A human needs a few seconds to fill five fields; scripts post instantly.
 const minFillMs = 3_000;
 // Reject a page left open for a day — the timestamp is stale, not a real fill.
@@ -128,6 +155,16 @@ export async function POST(request: Request) {
   // instant feedback, but that one is trivially bypassed.
   if (isPersonalEmail(values.email)) {
     return reject(workEmailMessage, 422, "email");
+  }
+
+  if (turnstileSecret) {
+    const token = String(submitted.get("cf-turnstile-response") ?? "").trim();
+    if (!token) {
+      return reject("Please complete the anti-spam check.", 422);
+    }
+    if (!(await passesTurnstile(token, clientIp(request)))) {
+      return reject("Anti-spam check failed. Please try again.", 422);
+    }
   }
 
   const payload = new FormData();

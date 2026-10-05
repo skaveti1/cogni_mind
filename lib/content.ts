@@ -149,11 +149,6 @@ export const contact = {
   eyebrow: "Get in touch",
   title: "Let's start with one workflow.",
   body: "We'll walk it with you and tell you if it's worth building. No commitment. No deck at the end.",
-  stats: [
-    { value: "17", label: "agents shipped in six months" },
-    { value: "5", label: "departments mapped end to end" },
-    { value: "24h", label: "response time" },
-  ],
   emailLabel: "Or email us directly",
   formTitle: "Tell us which workflow hurts most",
   formSubtitle: "Tell us what you're working with — we'll take it from there.",

@@ -21,23 +21,7 @@ export function Contact() {
             {contact.body}
           </p>
 
-          <dl className="mt-10 max-w-md space-y-5">
-            {contact.stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex items-baseline gap-4 border-b border-line pb-5"
-              >
-                <dt className="w-16 shrink-0 font-serif text-3xl text-ink">
-                  {stat.value}
-                </dt>
-                <dd className="text-sm leading-relaxed text-muted">
-                  {stat.label}
-                </dd>
-              </div>
-            ))}
-          </dl>
-
-          <p className="mt-8 text-sm text-muted">{contact.emailLabel}</p>
+          <p className="mt-10 text-sm text-muted">{contact.emailLabel}</p>
           <a
             href={`mailto:${site.email}`}
             className="mt-1 inline-block font-medium text-accent transition-colors hover:text-accent-hover"

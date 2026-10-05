@@ -34,7 +34,12 @@ export function WhyUs() {
       </Stagger>
 
       <Reveal delay={80} className="mt-16">
-        <LogoMarquee brands={brands.items} />
+        <p className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ink-soft">
+          Our Background
+        </p>
+        <div className="mt-5">
+          <LogoMarquee brands={brands.items} />
+        </div>
       </Reveal>
     </Scene>
   );

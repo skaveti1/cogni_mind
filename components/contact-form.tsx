@@ -17,13 +17,6 @@ export function ContactForm() {
     const form = event.currentTarget;
     setStatus("submitting");
 
-    if (!site.formspreeId) {
-      await new Promise((resolve) => setTimeout(resolve, 700));
-      setStatus("success");
-      form.reset();
-      return;
-    }
-
     try {
       const response = await fetch(
         `https://formspree.io/f/${site.formspreeId}`,

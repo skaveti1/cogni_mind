@@ -1,0 +1,8 @@
+{
+  "apex_air.csv": "part_id",
+  "delta_mechanical.csv": "Material",
+  "summit_climate.csv": "SKU",
+  "northfield_hvac.csv": "STK_NO",
+  "blackwell_refrigeration.csv": "ITEM_CODE",
+  "cascade_comfort.csv": "sku"
+}

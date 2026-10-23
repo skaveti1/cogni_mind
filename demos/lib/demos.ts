@@ -19,16 +19,23 @@ export type Demo = {
 export const demos: Demo[] = [
   {
     slug: "hvac-support-copilot",
-    name: "HVAC Tech Support",
-    tagline: "Manual-grounded triage, diagnosis, and human handoff.",
+    name: "HVAC Field Support",
+    tagline: "One copilot, in the field: manual-grounded diagnosis and human handoff.",
     href: "/",
     status: "live",
   },
   {
     slug: "plm",
-    name: "PLM Copilot",
-    tagline: "Draft and check data sheets, track regulation risk, find legacy parts.",
+    name: "Product Data (PLM)",
+    tagline: "Audit a new HVAC data sheet; the agent finds the downstream issues and creates the alerts.",
     href: "/plm",
+    status: "live",
+  },
+  {
+    slug: "quality",
+    name: "Quality Control",
+    tagline: "Sort messy warranty and quality complaints and spot failures repeating across companies.",
+    href: "/quality",
     status: "live",
   },
 ];

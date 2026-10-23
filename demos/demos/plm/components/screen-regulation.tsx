@@ -3,9 +3,17 @@
 import { useMemo, useState } from "react";
 import { ChevronDown, ChevronUp, SlidersHorizontal } from "lucide-react";
 import { regulationRisks } from "../lib/demoData";
-import type { RegulationRisk } from "../lib/types";
+import type { RegulationRisk, RegulationRiskRow } from "../lib/types";
 
-type SortKey = "product" | "regulation" | "risk" | "reason" | "revenue";
+type SortKey =
+  | "product"
+  | "company"
+  | "substance"
+  | "regulation"
+  | "risk"
+  | "reason"
+  | "units"
+  | "openOrders";
 
 const RISK_RANK: Record<RegulationRisk, number> = {
   High: 3,
@@ -19,77 +27,100 @@ const RISK_STYLE: Record<RegulationRisk, { dot: string; chip: string }> = {
   Low: { dot: "bg-online", chip: "border-online/40 bg-online/10 text-online" },
 };
 
-const REGULATIONS = [
-  "All regulations",
-  "EU Chrome Restriction 2026",
-  "RoHS 2027",
-];
-
-export function ScreenRegulation() {
-  const [sortKey, setSortKey] = useState<SortKey>("revenue");
+export function ScreenRegulation({
+  rows = regulationRisks,
+  title = "Products at Risk from Upcoming Regulations",
+  subtitle = "Ranked by units shipped so the products with the most affected volume surface first.",
+  onViewProduct,
+}: {
+  rows?: RegulationRiskRow[];
+  title?: string;
+  subtitle?: string;
+  onViewProduct?: (product: string) => void;
+}) {
+  const [sortKey, setSortKey] = useState<SortKey>("units");
   const [dir, setDir] = useState<"asc" | "desc">("desc");
-  const [filter, setFilter] = useState(REGULATIONS[0]);
+  const [filter, setFilter] = useState("All regulations");
+
+  const showCompany = rows.some((row) => row.company);
+  const showSubstance = rows.some((row) => row.substance);
+
+  const regulations = useMemo(
+    () => ["All regulations", ...new Set(rows.map((row) => row.regulation))],
+    [rows],
+  );
 
   const sorted = useMemo(() => {
-    const rows = regulationRisks.filter(
-      (row) => filter === REGULATIONS[0] || row.regulation === filter,
+    const filtered = rows.filter(
+      (row) => filter === "All regulations" || row.regulation === filter,
     );
-    const compare = (a: (typeof rows)[number], b: (typeof rows)[number]) => {
-      if (sortKey === "revenue")
-        return a.annualRevenueValue - b.annualRevenueValue;
+    const compare = (a: RegulationRiskRow, b: RegulationRiskRow) => {
+      if (sortKey === "units")
+        return a.unitsShippedValue - b.unitsShippedValue;
+      if (sortKey === "openOrders")
+        return a.openOrdersValue - b.openOrdersValue;
       if (sortKey === "risk") return RISK_RANK[a.risk] - RISK_RANK[b.risk];
-      return a[sortKey].localeCompare(b[sortKey]);
+      const av = (a[sortKey] ?? "") as string;
+      const bv = (b[sortKey] ?? "") as string;
+      return av.localeCompare(bv);
     };
-    return [...rows].sort((a, b) => {
+    return [...filtered].sort((a, b) => {
       const result = compare(a, b);
       return dir === "asc" ? result : -result;
     });
-  }, [sortKey, dir, filter]);
+  }, [rows, filter, sortKey, dir]);
 
   const toggleSort = (key: SortKey) => {
     if (key === sortKey) {
       setDir((value) => (value === "asc" ? "desc" : "asc"));
     } else {
       setSortKey(key);
-      setDir(key === "revenue" || key === "risk" ? "desc" : "asc");
+      setDir(
+        key === "units" || key === "openOrders" || key === "risk"
+          ? "desc"
+          : "asc",
+      );
     }
   };
 
   const headers: { key: SortKey; label: string; className?: string }[] = [
     { key: "product", label: "Product" },
-    { key: "regulation", label: "Regulation" },
-    { key: "risk", label: "Risk" },
-    { key: "reason", label: "Reason" },
-    { key: "revenue", label: "Annual Revenue", className: "text-right" },
   ];
+  if (showCompany) headers.push({ key: "company", label: "Company" });
+  headers.push({ key: "risk", label: "Risk" });
+  headers.push({ key: "reason", label: "Why" });
+  if (showSubstance)
+    headers.push({ key: "substance", label: "Restricted substance" });
+  headers.push({ key: "units", label: "Units shipped", className: "text-right" });
+  headers.push({ key: "openOrders", label: "Open orders", className: "text-right" });
 
   return (
     <div className="scroll-soft flex h-full min-h-0 flex-col gap-4 overflow-y-auto">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="font-serif text-[1.5rem] leading-tight text-ink">
-            Products at Risk from Upcoming Regulations
+            {title}
           </h1>
-          <p className="mt-1.5 text-[0.88rem] text-ink-soft">
-            Ranked by annual revenue so the biggest exposure surfaces first.
-          </p>
+          <p className="mt-1.5 text-[0.88rem] text-ink-soft">{subtitle}</p>
         </div>
 
-        <label className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface px-3 py-1.5">
-          <SlidersHorizontal className="h-3.5 w-3.5 text-muted" />
-          <span className="sr-only">Filter by regulation</span>
-          <select
-            value={filter}
-            onChange={(event) => setFilter(event.target.value)}
-            className="bg-transparent font-mono text-[0.68rem] uppercase tracking-[0.08em] text-ink focus:outline-none"
-          >
-            {REGULATIONS.map((regulation) => (
-              <option key={regulation} value={regulation}>
-                {regulation}
-              </option>
-            ))}
-          </select>
-        </label>
+        {regulations.length > 2 ? (
+          <label className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface px-3 py-1.5">
+            <SlidersHorizontal className="h-3.5 w-3.5 text-muted" />
+            <span className="sr-only">Filter by regulation</span>
+            <select
+              value={filter}
+              onChange={(event) => setFilter(event.target.value)}
+              className="bg-transparent font-mono text-[0.68rem] uppercase tracking-[0.08em] text-ink focus:outline-none"
+            >
+              {regulations.map((regulation) => (
+                <option key={regulation} value={regulation}>
+                  {regulation}
+                </option>
+              ))}
+            </select>
+          </label>
+        ) : null}
       </div>
 
       <div className="overflow-hidden rounded-2xl border border-line-strong bg-surface">
@@ -126,15 +157,35 @@ export function ScreenRegulation() {
           <tbody>
             {sorted.map((row) => (
               <tr
-                key={row.product}
+                key={`${row.product}-${row.regulation}`}
                 className="border-b border-line/70 last:border-0 hover:bg-elevated/50"
               >
-                <td className="px-4 py-3 font-mono text-[0.82rem] font-semibold tracking-[0.02em] text-ink">
-                  {row.product}
+                <td className="px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[0.82rem] font-semibold tracking-[0.02em] text-ink">
+                      {row.product}
+                    </span>
+                    {onViewProduct ? (
+                      <button
+                        type="button"
+                        onClick={() => onViewProduct(row.product)}
+                        className="rounded-full border border-line-strong px-2.5 py-1 font-mono text-[0.56rem] font-medium uppercase tracking-[0.08em] text-ink-soft transition-colors hover:bg-elevated hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                      >
+                        View product
+                      </button>
+                    ) : null}
+                  </div>
+                  {row.regulation ? (
+                    <span className="mt-1 block font-mono text-[0.58rem] uppercase tracking-[0.08em] text-muted">
+                      {row.regulation}
+                    </span>
+                  ) : null}
                 </td>
-                <td className="px-4 py-3 text-[0.82rem] text-ink-soft">
-                  {row.regulation}
-                </td>
+                {showCompany ? (
+                  <td className="px-4 py-3 text-[0.82rem] text-ink-soft">
+                    {row.company}
+                  </td>
+                ) : null}
                 <td className="px-4 py-3">
                   <span
                     className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[0.6rem] font-medium uppercase tracking-[0.08em] ${RISK_STYLE[row.risk].chip}`}
@@ -148,8 +199,19 @@ export function ScreenRegulation() {
                 <td className="px-4 py-3 text-[0.82rem] text-ink-soft">
                   {row.reason}
                 </td>
+                {showSubstance ? (
+                  <td className="px-4 py-3">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-danger/40 bg-danger-soft px-2.5 py-1 font-mono text-[0.6rem] font-medium uppercase tracking-[0.08em] text-danger">
+                      <span className="h-1.5 w-1.5 rounded-full bg-danger" />
+                      {row.substance}
+                    </span>
+                  </td>
+                ) : null}
                 <td className="px-4 py-3 text-right font-mono text-[0.82rem] font-medium text-ink">
-                  {row.annualRevenue}
+                  {row.unitsShipped}
+                </td>
+                <td className="px-4 py-3 text-right font-mono text-[0.82rem] text-ink-soft">
+                  {row.openOrders}
                 </td>
               </tr>
             ))}
@@ -159,7 +221,9 @@ export function ScreenRegulation() {
           <p className="font-mono text-[0.62rem] uppercase tracking-[0.1em] text-muted">
             {sorted.length} {sorted.length === 1 ? "product" : "products"} ·
             sorted by{" "}
-            {headers.find((header) => header.key === sortKey)?.label.toLowerCase()}
+            {headers
+              .find((header) => header.key === sortKey)
+              ?.label.toLowerCase() ?? "units"}
           </p>
         </div>
       </div>

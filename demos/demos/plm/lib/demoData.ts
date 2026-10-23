@@ -2,11 +2,14 @@ import type {
   AffectedDocumentRow,
   ChangeSummary,
   DataSheetRow,
+  DiffLine,
+  DiffSegment,
+  DocDiff,
+  DocDiffHunk,
   DocHealthRow,
   FlagDetail,
   LegacyPartRow,
   ManualDraftRow,
-  RegulationRiskRow,
   SpecDoc,
   TemplateField,
   UnmappedAttribute,
@@ -128,8 +131,8 @@ export const flagDetails: Record<string, FlagDetail> = {
       "CAD file metadata",
     ],
     actions: [
-      { label: "Enter value", primary: true },
-      { label: "Mark N/A" },
+      { label: "Enter value", primary: true, input: true },
+      { label: "Use 1.2 lbs", value: "1.2 lbs" },
       { label: "Defer", outcome: "defer" },
     ],
   },
@@ -144,8 +147,8 @@ export const flagDetails: Record<string, FlagDetail> = {
       "ANSI/BHMA test reports",
     ],
     actions: [
-      { label: "Enter value", primary: true },
-      { label: "Mark N/A" },
+      { label: "Enter value", primary: true, input: true },
+      { label: "Mark N/A", value: "N/A" },
       { label: "Defer", outcome: "defer" },
     ],
   },
@@ -153,7 +156,7 @@ export const flagDetails: Record<string, FlagDetail> = {
     id: "throw",
     kind: "conflict",
     field: "Throw",
-    body: "The spec and the published data sheet disagree. Decide which value is authoritative.",
+    body: "The spec and the published data sheet disagree. Decide which value is correct.",
     published: {
       value: "0.625 in",
       source: "DL-2400_datasheet_2019.pdf, p.1 §3.2",
@@ -163,9 +166,9 @@ export const flagDetails: Record<string, FlagDetail> = {
       source: "DL-2400_revC.pdf, §3.2 p.2",
     },
     actions: [
-      { label: "Keep spec (0.75 in)", primary: true },
-      { label: "Keep published (0.625 in)" },
-      { label: "Enter value" },
+      { label: "Keep spec (0.75 in)", primary: true, value: "0.75 in" },
+      { label: "Keep published (0.625 in)", value: "0.625 in" },
+      { label: "Enter value", input: true },
       { label: "Defer", outcome: "defer" },
     ],
   },
@@ -180,9 +183,9 @@ export const flagDetails: Record<string, FlagDetail> = {
       { value: "5,000,000 cycles", confidence: 0.07, source: "OCR alternate read" },
     ],
     actions: [
-      { label: "Confirm 500,000", primary: true },
-      { label: "Use 50,000" },
-      { label: "Enter value" },
+      { label: "Confirm 500,000", primary: true, value: "500,000 cycles" },
+      { label: "Use 50,000", value: "50,000 cycles" },
+      { label: "Enter value", input: true },
       { label: "Defer", outcome: "defer" },
     ],
   },
@@ -196,8 +199,8 @@ export const flagDetails: Record<string, FlagDetail> = {
       source: "DL-2400_datasheet_2019.pdf, p.2",
     },
     actions: [
-      { label: "Keep 10 years", primary: true },
-      { label: "Enter new value" },
+      { label: "Keep 10 years", primary: true, value: "10 years" },
+      { label: "Enter new value", input: true },
       { label: "Defer", outcome: "defer" },
     ],
   },
@@ -210,9 +213,9 @@ export const flagDetails: Record<string, FlagDetail> = {
     from: { value: "0.625 in", source: "Rev A §3 Install Latch, p.6" },
     to: { value: "0.75 in", source: "DL-2400_revC §3.2" },
     actions: [
-      { label: "Accept change", primary: true },
-      { label: "Keep old value" },
-      { label: "Edit", outcome: "defer" },
+      { label: "Accept change", primary: true, value: "0.75 in" },
+      { label: "Keep old value", value: "0.625 in" },
+      { label: "Edit", input: true },
     ],
   },
   "strike-manual": {
@@ -224,9 +227,9 @@ export const flagDetails: Record<string, FlagDetail> = {
     from: { value: "Standard strike opening", source: "Rev A §4 Strike Plate, p.7" },
     to: { value: "Widened to 0.75 in throw", source: "DL-2400_revC §3.2" },
     actions: [
-      { label: "Accept change", primary: true },
-      { label: "Keep old value" },
-      { label: "Edit", outcome: "defer" },
+      { label: "Accept change", primary: true, value: "Widened to 0.75 in throw" },
+      { label: "Keep old value", value: "Standard strike opening" },
+      { label: "Edit", input: true },
     ],
   },
   "adjust-added": {
@@ -237,9 +240,9 @@ export const flagDetails: Record<string, FlagDetail> = {
     body: "A new adjustment step is drafted to set the throw after installation.",
     to: { value: "Rotate the cam to set throw", source: "DL-2400_revC §3.2" },
     actions: [
-      { label: "Accept addition", primary: true },
-      { label: "Remove" },
-      { label: "Edit", outcome: "defer" },
+      { label: "Accept addition", primary: true, value: "Rotate the cam to set throw" },
+      { label: "Remove", value: "Removed" },
+      { label: "Edit", input: true },
     ],
   },
   "torque-removed": {
@@ -250,9 +253,9 @@ export const flagDetails: Record<string, FlagDetail> = {
     body: "The legacy torque step is superseded by the rev C fastener spec and can be removed.",
     from: { value: "Torque fasteners to 15 in-lb", source: "Rev A §6 Fasteners, p.9" },
     actions: [
-      { label: "Accept removal", primary: true },
-      { label: "Keep step" },
-      { label: "Edit", outcome: "defer" },
+      { label: "Accept removal", primary: true, value: "Removed — superseded" },
+      { label: "Keep step", value: "Torque fasteners to 15 in-lb" },
+      { label: "Edit", input: true },
     ],
   },
 };
@@ -276,15 +279,8 @@ export const approvedChanges: ChangeSummary[] = [
 
 export const legacyQuery = "brass latch 2-3/8 backset 1980s";
 
-/** Detour — sorted by annual revenue descending by default. */
-export const regulationRisks: RegulationRiskRow[] = [
-  { product: "DL-2400", regulation: "RoHS 2027", risk: "High", reason: "Lead in C36000 brass body", annualRevenue: "$1.2M", annualRevenueValue: 1200000 },
-  { product: "DL-1800", regulation: "EU Chrome Restriction 2026", risk: "High", reason: "Chrome finish detected", annualRevenue: "$890K", annualRevenueValue: 890000 },
-  { product: "DL-3200", regulation: "RoHS 2027", risk: "Medium", reason: "Lead content above threshold", annualRevenue: "$450K", annualRevenueValue: 450000 },
-  { product: "DL-2200", regulation: "EU Chrome Restriction 2026", risk: "Medium", reason: "Chrome in strike plate", annualRevenue: "$310K", annualRevenueValue: 310000 },
-  { product: "DL-1500", regulation: "RoHS 2027", risk: "Low", reason: "No restricted substances", annualRevenue: "$120K", annualRevenueValue: 120000 },
-  { product: "DL-900", regulation: "EU Chrome Restriction 2026", risk: "Low", reason: "Discontinued", annualRevenue: "$0", annualRevenueValue: 0 },
-];
+/** Detour — the DL Series portfolio, ranked by units shipped by default. */
+export { dlRiskProducts as regulationRisks } from "./risk-catalog";
 
 export const legacyParts: LegacyPartRow[] = [
   { partNumber: "DL-2400", description: 'Heavy-Duty Brass Door Latch, 2-3/8" backset', matchPct: 96, year: "1987", matchedOn: ["material=brass", "backset 2.375 in", "1980s"] },
@@ -292,12 +288,12 @@ export const legacyParts: LegacyPartRow[] = [
   { partNumber: "BL-400", description: 'Brass Latch Assembly, 2" backset', matchPct: 71, year: "1979", matchedOn: ["material=brass", "backset ≈2 in", "late 1970s"] },
 ];
 
-/** Detour — documents made stale by the approved change. */
+/** Detour — documents that need updating after the approved change. */
 export const affectedDocuments: AffectedDocumentRow[] = [
   { document: "DL-2400 Installation Manual", type: "Manual", lastUpdated: "2019-06", status: "needs-update", trigger: "Throw dimension" },
   { document: "DL-2400 Product Page", type: "Web", lastUpdated: "2021-02", status: "needs-update", trigger: "Throw · Weight" },
   { document: "DL-2400 Data Sheet", type: "Data Sheet", lastUpdated: "2019-06", status: "needs-update", trigger: "Throw · Weight · Warranty" },
-  { document: "DL-2400 Sell Sheet", type: "Web", lastUpdated: "2020-11", status: "needs-update", trigger: "Throw dimension" },
+  { document: "DL-2400 Installer Quick-Start Guide", type: "Guide", lastUpdated: "2020-11", status: "needs-update", trigger: "Throw dimension" },
   { document: "DL Series Catalog", type: "Manual", lastUpdated: "2018-09", status: "needs-update", trigger: "Weight" },
   { document: "DL-2400 FAQ", type: "Web", lastUpdated: "2022-04", status: "review", trigger: "Warranty wording" },
 ];
@@ -328,7 +324,7 @@ export const manualTargetDocId = "install";
 export const docHealthRows: DocHealthRow[] = [
   { id: "install", document: "DL-2400 Installation Manual", type: "Manual", lastUpdated: "2019-06", status: "out-of-date", revisionsBehind: 4 },
   { id: "product", document: "DL-2400 Product Page", type: "Web", lastUpdated: "2021-02", status: "out-of-date", revisionsBehind: 2 },
-  { id: "sell", document: "DL-2400 Sell Sheet", type: "Web", lastUpdated: "2020-11", status: "out-of-date", revisionsBehind: 1 },
+  { id: "sell", document: "DL-2400 Installer Quick-Start Guide", type: "Guide", lastUpdated: "2020-11", status: "out-of-date", revisionsBehind: 1 },
   { id: "datasheet", document: "DL-2400 Data Sheet", type: "Data Sheet", lastUpdated: "2025-01", status: "current", revisionsBehind: 0 },
   { id: "legacy", document: "DL-900 Legacy Datasheet", type: "Data Sheet", lastUpdated: "2011-03", status: "archived", revisionsBehind: 0 },
 ];
@@ -407,3 +403,268 @@ export const manualChangeSummary: ChangeSummary[] = [
   { field: "Throw Adjustment", from: "—", to: "New step", kind: "set" },
   { field: "Torque Spec", from: "15 in-lb", to: "Removed", kind: "set" },
 ];
+
+/* ------------------------------------------------------------------ */
+/* Document diffs (git-style line changes)                             */
+/* ------------------------------------------------------------------ */
+
+function tokenize(text: string): string[] {
+  return text.split(/(\s+)/).filter((token) => token.length > 0);
+}
+
+/** Word-level diff: marks the tokens that differ between two lines. */
+function wordDiff(
+  oldText: string,
+  newText: string,
+): { old: DiffSegment[]; next: DiffSegment[] } {
+  const a = tokenize(oldText);
+  const b = tokenize(newText);
+  const m = a.length;
+  const n = b.length;
+  const table: number[][] = Array.from({ length: m + 1 }, () =>
+    new Array<number>(n + 1).fill(0),
+  );
+  for (let i = m - 1; i >= 0; i -= 1) {
+    for (let j = n - 1; j >= 0; j -= 1) {
+      table[i][j] =
+        a[i] === b[j]
+          ? table[i + 1][j + 1] + 1
+          : Math.max(table[i + 1][j], table[i][j + 1]);
+    }
+  }
+  const commonA = new Set<number>();
+  const commonB = new Set<number>();
+  let i = 0;
+  let j = 0;
+  while (i < m && j < n) {
+    if (a[i] === b[j]) {
+      commonA.add(i);
+      commonB.add(j);
+      i += 1;
+      j += 1;
+    } else if (table[i + 1][j] >= table[i][j + 1]) {
+      i += 1;
+    } else {
+      j += 1;
+    }
+  }
+  return {
+    old: a.map((text, index) => ({ text, emphasis: !commonA.has(index) })),
+    next: b.map((text, index) => ({ text, emphasis: !commonB.has(index) })),
+  };
+}
+
+function contextLine(text: string, oldLine: number, newLine: number): DiffLine {
+  return { kind: "context", segments: [{ text }], oldLine, newLine };
+}
+
+function addedLine(text: string, newLine: number): DiffLine {
+  return { kind: "add", segments: [{ text }], newLine };
+}
+
+function removedLine(text: string, oldLine: number): DiffLine {
+  return { kind: "remove", segments: [{ text }], oldLine };
+}
+
+/** A changed line: an old line removed and the new line added, word-diffed. */
+function changedLine(
+  oldText: string,
+  oldLine: number,
+  newText: string,
+  newLine: number,
+): DiffLine[] {
+  const { old, next } = wordDiff(oldText, newText);
+  return [
+    { kind: "remove", segments: old, oldLine },
+    { kind: "add", segments: next, newLine },
+  ];
+}
+
+function buildDiff(path: string, hunks: DocDiffHunk[]): DocDiff {
+  let added = 0;
+  let removed = 0;
+  for (const hunk of hunks) {
+    for (const line of hunk.lines) {
+      if (line.kind === "add") added += 1;
+      else if (line.kind === "remove") removed += 1;
+    }
+  }
+  return { path, stats: { added, removed }, hunks };
+}
+
+/** MAA-200 Installation Manual §7.2 — rev A (2-wire) → rev C (3-wire). */
+export const maa200WiringDiff: DocDiff = buildDiff(
+  "MAA-200 Installation Manual · §7.2 Wiring",
+  [
+    {
+      heading: "§7.2 Wiring",
+      context: "rev A p.14 → rev C",
+      lines: [
+        contextLine("Control Wiring Diagram", 12, 12),
+        ...changedLine(
+          "Two-wire control connection (rev A).",
+          13,
+          "Three-wire control connection (rev C).",
+          13,
+        ),
+        contextLine(
+          "Disconnect power at the service switch and confirm 0 VAC.",
+          14,
+          14,
+        ),
+        contextLine("Remove the control-box cover.", 15, 15),
+        contextLine(
+          "Route the thermostat cable through the left-hand grommet.",
+          16,
+          16,
+        ),
+        contextLine(
+          "Strip 1/4 in (6 mm) of insulation from each conductor.",
+          17,
+          17,
+        ),
+        ...changedLine(
+          "Connect the thermostat to terminals R and C.",
+          18,
+          "Connect the thermostat to terminals R, C, and G.",
+          18,
+        ),
+        contextLine(
+          "Tighten the terminal screws to 0.5 N·m (4.4 in-lb).",
+          19,
+          19,
+        ),
+        ...changedLine(
+          "Diagram 7.2 shows a two-wire control connection.",
+          20,
+          "Diagram 7.2 shows a three-wire control connection.",
+          20,
+        ),
+        contextLine(
+          "Label the thermostat cable and record the configuration in the startup checklist.",
+          21,
+          21,
+        ),
+        contextLine("Seal the grommet after routing.", 22, 22),
+        contextLine(
+          "Restore power and verify 24 VAC between R and C.",
+          23,
+          23,
+        ),
+      ],
+    },
+  ],
+);
+
+/** MAA-200 Product Page — 2-wire → 3-wire control. Sent to the Web team. */
+export const maa200ProductPageDiff: DocDiff = buildDiff(
+  "MAA-200 Product Page · Specifications",
+  [
+    {
+      heading: "Specifications",
+      context: "published → draft",
+      lines: [
+        contextLine("Efficiency: 14.3 SEER2", 4, 4),
+        ...changedLine("Control wiring: 2-wire", 5, "Control wiring: 3-wire", 5),
+        contextLine("Refrigerant: R-410A", 6, 6),
+      ],
+    },
+  ],
+);
+
+/** MAA-200 Installer Quick-Start Guide — 2-wire → 3-wire control. Sent to the Field team. */
+export const maa200QuickStartDiff: DocDiff = buildDiff(
+  "MAA-200 Installer Quick-Start Guide · Wiring",
+  [
+    {
+      heading: "Wiring",
+      context: "published → draft",
+      lines: [
+        contextLine(
+          "Mount the indoor unit and connect line voltage.",
+          2,
+          2,
+        ),
+        ...changedLine(
+          "Simple 2-wire control connection",
+          3,
+          "Simple 3-wire control connection (R, C, G)",
+          3,
+        ),
+        contextLine(
+          "Set the thermostat and confirm airflow.",
+          4,
+          4,
+        ),
+      ],
+    },
+  ],
+);
+
+/** MAA-200 Data Sheet — 2-wire → 3-wire control. Sent to the Docs team. */
+export const maa200DataSheetDiff: DocDiff = buildDiff(
+  "MAA-200 Data Sheet · Electrical",
+  [
+    {
+      heading: "Electrical",
+      context: "rev A → intended",
+      lines: [
+        contextLine("Voltage: 208/230 V", 7, 7),
+        ...changedLine(
+          "Control circuit: 24 VAC, 2-wire",
+          8,
+          "Control circuit: 24 VAC, 3-wire",
+          8,
+        ),
+        addedLine("Thermostat terminals: R, C, G", 9),
+      ],
+    },
+  ],
+);
+
+/** DL-2400 Installation Manual — rev A → rev C. */
+export const dl2400ManualDiff: DocDiff = buildDiff(
+  "DL-2400 Installation Manual",
+  [
+    {
+      heading: "§3 Install Latch",
+      context: "rev A p.6 → rev C",
+      lines: [
+        contextLine("Insert the latch into the bore.", 5, 5),
+        ...changedLine(
+          "Throw: 0.625 in standard.",
+          6,
+          "Throw: 0.75 in standard.",
+          6,
+        ),
+      ],
+    },
+    {
+      heading: "§4 Strike Plate",
+      context: "rev A p.7 → rev C",
+      lines: [
+        contextLine("Align the strike with the latch bolt.", 8, 8),
+        addedLine(
+          "Widen the strike opening to clear the 0.75 in throw.",
+          9,
+        ),
+      ],
+    },
+    {
+      heading: "§5 Throw Adjustment (new)",
+      context: "rev C",
+      lines: [
+        addedLine("Rotate the cam to set the throw.", 10),
+        addedLine("Verify the throw measures 0.75 in.", 11),
+      ],
+    },
+    {
+      heading: "§6 Fasteners",
+      context: "rev A p.9 → rev C",
+      lines: [
+        removedLine("Torque fasteners to 15 in-lb.", 12),
+        addedLine("Reference the rev C fastener torque spec (§5).", 12),
+      ],
+    },
+  ],
+);

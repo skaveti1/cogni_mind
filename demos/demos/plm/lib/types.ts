@@ -98,7 +98,14 @@ export type FlagAction = {
   label: string;
   primary?: boolean;
   outcome?: FlagActionOutcome;
+  /** Value applied when this action resolves the field. */
+  value?: string;
+  /** Prompt the user for a value before resolving. */
+  input?: boolean;
 };
+
+/** Resolved values per flag id, overriding the seeded data-sheet value. */
+export type ResolvedValues = Record<string, string>;
 
 export type MissingFlagDetail = {
   id: string;
@@ -170,8 +177,22 @@ export type RegulationRiskRow = {
   regulation: string;
   risk: RegulationRisk;
   reason: string;
-  annualRevenue: string;
-  annualRevenueValue: number;
+  /** Units shipped in the last 12 months, e.g. "8,400". */
+  unitsShipped: string;
+  /** Numeric form of `unitsShipped`, for sorting. */
+  unitsShippedValue: number;
+  /** Units on open (unfulfilled) orders. */
+  openOrders: string;
+  /** Numeric form of `openOrders`, for sorting. */
+  openOrdersValue: number;
+  /** Date the restriction takes effect. */
+  deadline?: string;
+  /** Owning company, shown for cross-company (ACS group) views. */
+  company?: string;
+  /** Refrigerant or restricted substance under review. */
+  substance?: string;
+  /** Person accountable for the mitigation. */
+  owner?: string;
 };
 
 export type LegacyPartRow = {
@@ -189,7 +210,7 @@ export type AffectedDocumentRow = {
   type: string;
   lastUpdated: string;
   status: DocumentStatus;
-  /** Which approved change makes this document stale. */
+  /** Which approved change makes this document need updating. */
   trigger: string;
 };
 
@@ -228,4 +249,171 @@ export type ManualDraftRow = {
   source?: SourceRef;
   flagId?: string;
   note?: string;
+};
+
+/* ------------------------------------------------------------------ */
+/* Product Care Inbox — cross-conversation work queue                  */
+/* ------------------------------------------------------------------ */
+
+export type QueueSeverity = "red" | "amber" | "green";
+
+export type QueueStatus =
+  | "open"
+  | "tracking"
+  | "resolved"
+  | "declined"
+  | "acknowledged";
+
+export type QueueActionVerb = "Review" | "Search" | "Draft";
+
+export type QueueItem = {
+  id: string;
+  severity: QueueSeverity;
+  /** Small uppercase label, e.g. "DOCUMENTATION MISMATCH". */
+  type: string;
+  /** Product or scope the item applies to. */
+  scope: string;
+  summary: string;
+  action: QueueActionVerb;
+  status: QueueStatus;
+};
+
+/** Actions emitted from queue cards, handled centrally by the page. */
+export type QueueCardAction =
+  | "field-approve"
+  | "field-reject"
+  | "compliance-view"
+  | "compliance-act"
+  | "compliance-case-select"
+  | "compliance-case-act"
+  | "pricing-decide"
+  | "propagation-cancel";
+
+/** A committed mitigation path for a regulation-exposed product. */
+export type ComplianceAction =
+  | "change-request"
+  | "request-declaration"
+  | "acknowledge";
+
+/** One mitigation option shown on the compliance decision card. */
+export type ComplianceOption = {
+  id: ComplianceAction;
+  label: string;
+  description: string;
+  result: string;
+  primary?: boolean;
+};
+
+/** The structured record produced after a compliance action is chosen. */
+export type ComplianceOutcome = {
+  action: ComplianceAction;
+  product: string;
+  title: string;
+  referenceId: string;
+  status: "tracking" | "acknowledged";
+  summary: string;
+  details: { label: string; value: string }[];
+};
+
+/** A committed sourcing decision for a part with split supplier pricing. */
+export type PricingDecision =
+  | "keep-dual"
+  | "consolidate-delta"
+  | "consolidate-summit";
+
+/** One sourcing option shown on the parts pricing card. */
+export type PricingOption = {
+  id: PricingDecision;
+  label: string;
+  description: string;
+  result: string;
+  primary?: boolean;
+};
+
+/** The structured record produced after a pricing decision is chosen. */
+export type PricingOutcome = {
+  decision: PricingDecision;
+  title: string;
+  referenceId: string;
+  status: "tracking" | "acknowledged";
+  summary: string;
+  details: { label: string; value: string }[];
+  queueSummary: string;
+};
+
+/** A suggested reply chip the user can click to dispatch a queue action. */
+export type PromptOption = {
+  id: string;
+  label: string;
+  action: QueueCardAction;
+  payload?: string;
+};
+
+/** One proposed documentation change, governed by an engineering change request. */
+export type DocChange = {
+  document: string;
+  section: string;
+  currentManual: string;
+  currentSpec: string;
+  reportedBy: string;
+  warning?: string;
+  proposed: string;
+  /** Engineering change request raised for this change. */
+  ecrId: string;
+  /** How many documents reference the changed section. */
+  whereUsed: number;
+  /** Before/after summary shown as a redline. */
+  redline: { from: string; to: string };
+  /** Line-level document diff, shown in the change proposal. */
+  diff?: DocDiff;
+};
+
+/* ------------------------------------------------------------------ */
+/* Document diff (git-style, +/- lines)                                */
+/* ------------------------------------------------------------------ */
+
+export type DiffLineKind = "context" | "add" | "remove";
+
+export type DiffSegment = {
+  text: string;
+  /** Highlighted as a word-level change within the line. */
+  emphasis?: boolean;
+};
+
+export type DiffLine = {
+  kind: DiffLineKind;
+  segments: DiffSegment[];
+  /** Line number in the old document, if present. */
+  oldLine?: number;
+  /** Line number in the new document, if present. */
+  newLine?: number;
+};
+
+export type DocDiffHunk = {
+  /** Section heading the hunk sits under, e.g. "§7.2 Wiring". */
+  heading: string;
+  /** Optional range marker, e.g. "rev A p.14 → rev C". */
+  context?: string;
+  lines: DiffLine[];
+};
+
+export type DocDiff = {
+  /** Document path shown in the header, e.g. "MAA-200 Installation Manual". */
+  path: string;
+  stats: { added: number; removed: number };
+  hunks: DocDiffHunk[];
+};
+
+export type ImpactRow = {
+  document: string;
+  type: string;
+  /** The changed section/attribute that affects this document. */
+  trigger: string;
+  owner: string;
+  status: string;
+  /** Sample PDF to open for this document, if one is available. */
+  pdfId?: string;
+  page?: number;
+  /** Line-level change this update would make to the document. */
+  diff?: DocDiff;
 };

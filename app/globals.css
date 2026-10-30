@@ -443,6 +443,28 @@ body {
   }
 }
 
+/* Compact intro band for subpages that don't need a full-height hero. */
+.scene-compact {
+  min-height: auto;
+  padding-block: 3.5rem;
+}
+@media (min-width: 768px) {
+  .scene-compact {
+    min-height: auto;
+    padding-block: 4.5rem;
+  }
+}
+
+/* Tighter section rhythm for dense content pages like /demos. */
+.scene-tight {
+  padding-block: 3.5rem;
+}
+@media (min-width: 768px) {
+  .scene-tight {
+    padding-block: 5rem;
+  }
+}
+
 /* Dark band card surface */
 .band-card {
   border: 1px solid var(--color-line);
@@ -496,6 +518,9 @@ body {
   transform-origin: left;
   background: var(--color-accent);
   transition: transform 0.2s var(--ease-out-soft);
+}
+.nav-link-highlight::after {
+  background: var(--color-amber);
 }
 @media (hover: hover) {
   .nav-link:hover::after {

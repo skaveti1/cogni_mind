@@ -8,8 +8,16 @@ export const site = {
     "An AI for manufacturers and distributors that does the tasks you thought were impossible",
 } as const;
 
-export const nav = [
+export type NavItem = {
+  label: string;
+  href: string;
+  highlight?: boolean;
+};
+
+export const nav: readonly NavItem[] = [
+  { label: "Home", href: "/#top" },
   { label: "How it works", href: "/#how-it-works" },
   { label: "Why us", href: "/#why-us" },
   { label: "Case study", href: "/#case-study" },
-] as const;
+  { label: "Demos", href: "/demos", highlight: true },
+];

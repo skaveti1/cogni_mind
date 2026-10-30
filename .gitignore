@@ -46,3 +46,10 @@ node_modules/
 .next/
 
 demos/.next/
+
+# raw local media masters (web-ready copies live in /public)
+/plm_demo.mp4
+/technician demo.mp4
+/quality control demo.mp4
+/cogni_plm.mp4
+/cogni_plm.gif

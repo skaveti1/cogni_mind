@@ -19,10 +19,10 @@ export type DemoVideo = {
 export const demoVideos = [
   {
     slug: "plm",
-    name: "Product Lifecycle Management Copilot",
+    name: "Product Lifecycle Management Agent",
     tagline: "Draft and check product data sheets without chasing spreadsheets.",
     description:
-      "This walkthrough shows the PLM Copilot reading source documents, drafting a product data sheet, and flagging the fields that need an engineer's review. It also surfaces regulation risk and legacy parts tied to the product, so the team can make the call before anything is published.",
+      "This walkthrough shows the PLM Agent reading source documents, drafting a product data sheet, and flagging the fields that need an engineer's review. It also surfaces regulation risk and legacy parts tied to the product, so the team can make the call before anything is published.",
     status: "live",
     duration: "47 sec",
     videoSrc: "/videos/plm-demo.mp4",
@@ -36,10 +36,10 @@ export const demoVideos = [
   },
   {
     slug: "tech-support",
-    name: "Tech Support Copilot",
+    name: "Tech Support Agent",
     tagline: "Manual-grounded triage, diagnosis, and human handoff.",
     description:
-      "A support copilot that loads service manuals, runs concurrent searches, and guides a technician through a fault while keeping diagnosis and escalation in human hands.",
+      "A support agent that loads service manuals, runs concurrent searches, and guides a technician through a fault while keeping diagnosis and escalation in human hands.",
     status: "live",
     duration: "42 sec",
     videoSrc: "/videos/tech-support-demo.mp4",
@@ -52,10 +52,10 @@ export const demoVideos = [
   },
   {
     slug: "quality-control",
-    name: "Quality Control Copilot",
+    name: "Quality Control Agent",
     tagline: "One standardized ticket stream across every subsidiary.",
     description:
-      "An intelligent ticketing system that normalizes quality issues from every subsidiary into one dashboard, then surfaces repeating product problems that would otherwise be missed. The agent clusters similar failures, links them to the affected products, and keeps quality teams focused on the exceptions that need a human call.",
+      "A quality agent that normalizes quality issues from every subsidiary into one dashboard, then surfaces repeating product problems that would otherwise be missed. The agent clusters similar failures, links them to the affected products, and keeps quality teams focused on the exceptions that need a human call.",
     status: "live",
     duration: "31 sec",
     videoSrc: "/videos/quality-control-demo.mp4",

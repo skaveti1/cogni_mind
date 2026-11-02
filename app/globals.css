@@ -295,6 +295,59 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
+/* Trial run: replay console cascade and miss highlight                */
+/* ------------------------------------------------------------------ */
+@media (scripting: enabled) {
+  .replay-console .replay-row {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+
+  .replay-console .replay-note {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+
+  .reveal-el.is-visible .replay-row {
+    animation: replay-row-in 0.5s var(--ease-out-soft)
+      calc(var(--i, 0) * 0.11s) both;
+  }
+
+  .reveal-el.is-visible .replay-row-miss {
+    animation:
+      replay-row-in 0.5s var(--ease-out-soft)
+        calc(var(--i, 0) * 0.11s) both,
+      replay-miss-highlight 0.9s var(--ease-out-soft) 1.35s forwards;
+  }
+
+  .reveal-el.is-visible .replay-note {
+    animation: replay-note-in 0.6s var(--ease-out-soft) 1.85s both;
+  }
+}
+
+@keyframes replay-row-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes replay-miss-highlight {
+  to {
+    border-color: color-mix(in oklab, var(--color-amber) 42%, transparent);
+    background-color: var(--color-amber-soft);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-amber) 10%, transparent);
+  }
+}
+
+@keyframes replay-note-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Logo marquee: moving credentials banner                             */
 /* ------------------------------------------------------------------ */
 .marquee {
@@ -465,6 +518,17 @@ body {
   }
 }
 
+/* Compact band for a section that should fit on one screen. */
+.scene-trial {
+  min-height: auto;
+  padding-block: 3.5rem;
+}
+@media (min-width: 768px) {
+  .scene-trial {
+    padding-block: 2.5rem;
+  }
+}
+
 /* Dark band card surface */
 .band-card {
   border: 1px solid var(--color-line);
@@ -590,6 +654,17 @@ body {
   }
   .merge-float {
     animation: none !important;
+  }
+  .replay-row,
+  .replay-note {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .replay-row-miss {
+    border-color: color-mix(in oklab, var(--color-amber) 42%, transparent);
+    background-color: var(--color-amber-soft);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-amber) 10%, transparent);
   }
   .lift:hover {
     transform: none !important;

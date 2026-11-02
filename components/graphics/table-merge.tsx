@@ -196,7 +196,7 @@ export function TableMerge() {
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
             </span>
             <span className="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-accent">
-              AI co-worker
+              AI agents
             </span>
             <span className="ml-auto flex items-center gap-1 text-[0.6rem] text-muted">
               <svg

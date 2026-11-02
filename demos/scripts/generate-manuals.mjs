@@ -694,7 +694,7 @@ function coverPage(p, ctx) {
   );
   p.note("For professional use only. Service work must be performed by qualified personnel.");
   p.y = 700;
-  p.centerText("Cognimind  |  Field Support Copilot", 0, 700, PAGE_W, {
+  p.centerText("Cognimind  |  Field Support Agent", 0, 700, PAGE_W, {
     font: "F1",
     size: 8.5,
     color: MUTED,

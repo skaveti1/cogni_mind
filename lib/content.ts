@@ -1,10 +1,10 @@
 export const hero = {
   eyebrow: "For manufacturers and distributors",
-  title: "AI agents that do the work you thought was impossible",
+  title: "Quotes out in hours. Orders confirmed the same day.",
   statement: "The decisions stay with your team.",
-  subtitle:
-    "Quotes out in hours. Orders confirmed the same day. Stock checked as it comes off the truck.",
-  subtitleEmphasis: "Same headcount.",
+  subtitle: "AI agents do the busywork,",
+  subtitleEmphasis: "with the same headcount.",
+  note: "If it's not worth building yet, we'll tell you.",
   actions: [
     { label: "Start with one workflow", href: "#contact", variant: "primary" as const },
   ],
@@ -12,8 +12,8 @@ export const hero = {
 
 export const receiving = {
   eyebrow: "A day in the life of a receiving clerk",
-  title: "See how the AI co-worker helps.",
-  body: "A truck arrives. The AI co-worker checks every line against the order before it leaves the dock.",
+  title: "See how the AI agent helps.",
+  body: "A truck arrives. The AI agent checks every line against the order before it leaves the dock.",
   image: "/screenshots/table_dashboard.png",
   imageAlt:
     "Example receiving dashboard showing a delivery from Northside Supply against PO-4418, with lines that match the order and two flagged for the team to review.",
@@ -36,7 +36,7 @@ export const howItWorks = {
       title: "Build and test",
       tag: "2–3 weeks",
       bullets: [
-        "We build the AI for that one task, using your real data.",
+        "We build the agent for that one task, using your real data.",
         "Your team checks its work and approves anything it isn't sure about.",
         "It learns from every correction.",
       ],
@@ -46,13 +46,55 @@ export const howItWorks = {
       tag: "6 months",
       bullets: [
         "We go where your team loses the most time next. You decide the order.",
-        "Each one goes faster, because the AI already knows your products, customers, and how you work.",
+        "Each one goes faster.",
         "We keep it all running.",
       ],
     },
   ],
-  note: "Sometimes the honest answer is that it's not worth building yet. We'll say that too.",
 };
+
+export const trialRun = {
+  eyebrow: "Trial run",
+  title: "Your past work in. A proven agent out.",
+  body: "Most AI gets judged on the easy cases. We judge it on the hard ones.",
+  steps: [
+    {
+      title: "Replay",
+      body: "It works through 6 months of your past work.",
+    },
+    {
+      title: "Find",
+      body: "You see every one it got wrong.",
+    },
+    {
+      title: "Decide",
+      body: "You pick what to fix.",
+    },
+    {
+      title: "Fix",
+      body: "We teach it what your veterans know.",
+    },
+    {
+      title: "Go live",
+      body: "Only when you say so.",
+    },
+  ],
+  replay: {
+    label: "Replay console",
+    meta: "Example · 6 months",
+    columns: ["Past work", "Your team", "Agent", "Result"],
+    rows: [
+      { id: "WK-1041", team: "Approve", agent: "Approve", result: "Match" },
+      { id: "WK-1042", team: "Deny", agent: "Deny", result: "Match" },
+      { id: "WK-1043", team: "Approve", agent: "Approve", result: "Match" },
+      { id: "WK-1044", team: "Approve", agent: "Deny", result: "Miss" },
+      { id: "WK-1045", team: "Deny", agent: "Deny", result: "Match" },
+    ],
+    note: "The miss: a dealer with an extended warranty. Your veterans knew. Now the agent does too.",
+  },
+};
+
+export type TrialRunReplay = typeof trialRun.replay;
 
 export const caseStudy = {
   eyebrow: "Case study",
@@ -61,16 +103,15 @@ export const caseStudy = {
   stats: [
     {
       value: "17",
-      label: "AI agents and automations shipped alongside their engineers",
+      label: "AI agents and automations shipped",
     },
     {
       value: "5",
-      label:
-        "Departments mapped end to end: procurement, sales, supply chain, finance, HR",
+      label: "Departments mapped end to end",
     },
     {
       value: "Live",
-      label: "Still running and expanding across their companies today",
+      label: "Still running and expanding",
     },
   ],
   sections: [
@@ -87,11 +128,12 @@ export const caseStudy = {
       label: "The outcome",
       items: [
         "Still running and expanding today.",
-        "The audit projected about a third of manual work could be automated, with seven-figure yearly savings. These are audit estimates, not measured results.",
+        "The audit projected about a third of manual work could be automated, with seven-figure yearly savings.",
       ],
     },
   ],
-  disclaimer: "Client agreements keep the name off this page.",
+  disclaimer:
+    "Savings shown are audit estimates, not measured results. Client name kept private.",
 };
 
 export const whyUs = {
@@ -100,19 +142,19 @@ export const whyUs = {
   cards: [
     {
       title: "We've run the floor.",
-      body: "We've spent years in warehouses and factories at Amazon, Wayfair, Trane, Corning, and Hubbell. We know where the day goes wrong.",
+      body: "Years in warehouses and factories at Amazon, Wayfair, Trane, Corning, and Hubbell.",
     },
     {
       title: "We build, not just advise.",
-      body: "We're engineers by training. We've shipped AI at companies from early-stage startups to billion-dollar businesses like Wayfair.",
+      body: "Engineers by training. We've shipped AI at startups and at Wayfair.",
     },
     {
       title: "We know which tools work.",
-      body: "We invest in AI startups and see hundreds of tools a year. We're not tied to any vendor, so we recommend what fits.",
+      body: "We invest in AI startups. We're not tied to any vendor.",
     },
     {
       title: "We stay until it works.",
-      body: "Your team keeps the software and the know-how. We keep it running.",
+      body: "You keep the software. We keep it running.",
     },
   ],
 };
@@ -130,6 +172,7 @@ export const brands = {
     { name: "Trane", logo: "/logos/trane.png", logoWhite: "/logos/white/trane.png" },
     { name: "Corning", logo: "/logos/corning.png", logoWhite: "/logos/white/corning.png" },
     { name: "Hubbell", logo: "/logos/hubbell.png", logoWhite: "/logos/white/hubbell.png" },
+    { name: "Danaher", logo: "/logos/danaher.png", logoWhite: "/logos/white/danaher.png" },
     {
       name: "Liebherr Group",
       logo: "/logos/liebherr.png",
@@ -148,9 +191,9 @@ export const brands = {
 export const contact = {
   eyebrow: "Get in touch",
   title: "Let's start with one workflow.",
-  body: "We'll walk it with you and tell you if it's worth building. No commitment. No deck at the end.",
+  body: "No commitment. No deck at the end.",
   emailLabel: "Or email us directly",
-  formTitle: "Tell us which workflow hurts most",
-  formSubtitle: "Tell us what you're working with — we'll take it from there.",
+  formTitle: "Which workflow hurts most?",
+  formSubtitle: "Tell us where the work slows down — we'll take it from there.",
   note: "We respond within 24 hours · No spam, ever.",
 };

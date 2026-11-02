@@ -3,9 +3,9 @@ export const site = {
   url: "https://www.cognimind.ai",
   email: "inquiries@cognimind.ai",
   description:
-    "Cognimind builds AI co-workers for manufacturers and distributors. One workflow at a time — the AI handles the busywork, the decisions stay with your team.",
+    "Cognimind builds AI agents for manufacturers and distributors. One workflow at a time — the agents handle the busywork, the decisions stay with your team.",
   tagline:
-    "An AI for manufacturers and distributors that does the tasks you thought were impossible",
+    "AI agents for manufacturers and distributors. The decisions stay with your team.",
 } as const;
 
 export type NavItem = {

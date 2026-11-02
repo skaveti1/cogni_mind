@@ -26,7 +26,7 @@ export const demos: Demo[] = [
   },
   {
     slug: "plm",
-    name: "PLM Copilot",
+    name: "PLM Agent",
     tagline: "Draft and check data sheets, track regulation risk, find legacy parts.",
     href: "/plm",
     status: "live",

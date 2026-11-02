@@ -8,12 +8,14 @@ export function DemoVideoPlayer({
   duration,
   poster,
   captions,
+  compact = false,
 }: {
   src: string;
   title: string;
   duration?: string;
   poster?: string;
   captions?: string;
+  compact?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
@@ -26,7 +28,11 @@ export function DemoVideoPlayer({
   };
 
   return (
-    <div className="relative aspect-[160/81] overflow-hidden rounded-2xl border border-line-strong bg-forest shadow-[0_1px_2px_rgba(26,24,21,0.24),0_30px_70px_-34px_rgba(26,24,21,0.55)]">
+    <div
+      className={`relative overflow-hidden rounded-none bg-forest shadow-[0_24px_50px_-32px_rgba(26,24,21,0.35)] ${
+        compact ? "aspect-[16/9]" : "aspect-[160/81]"
+      }`}
+    >
       <video
         ref={videoRef}
         src={src}
@@ -63,16 +69,22 @@ export function DemoVideoPlayer({
             className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(20,18,15,0.16)_0%,rgba(20,18,15,0.08)_40%,rgba(20,18,15,0.88)_100%)]"
           />
 
-          <span className="relative flex w-fit items-center gap-2 rounded-full border border-white/15 bg-forest/55 px-2.5 py-1 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-white/80 backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-            Cognimind demo
-          </span>
+          {!compact ? (
+            <span className="relative flex w-fit items-center gap-2 rounded-full border border-white/15 bg-forest/55 px-2.5 py-1 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-white/80 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+              Cognimind demo
+            </span>
+          ) : null}
 
           <span className="relative flex flex-1 items-center justify-center">
-            <span className="flex h-20 w-20 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur transition-transform duration-300 group-hover:scale-105 group-hover:border-white/50">
+            <span
+              className={`flex items-center justify-center rounded-full bg-white text-forest shadow-[0_10px_30px_rgba(0,0,0,0.28)] ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105 ${
+                compact ? "h-14 w-14" : "h-16 w-16"
+              }`}
+            >
               <svg
-                width="26"
-                height="26"
+                width={compact ? "18" : "20"}
+                height={compact ? "18" : "20"}
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 aria-hidden="true"
@@ -84,10 +96,16 @@ export function DemoVideoPlayer({
 
           <span className="relative flex items-end justify-between gap-4">
             <span className="min-w-0">
-              <span className="block font-mono text-[0.6rem] uppercase tracking-[0.16em] text-white/55">
-                Watch the walkthrough
-              </span>
-              <span className="mt-1 block font-serif text-xl leading-snug text-white">
+              {!compact ? (
+                <span className="block font-mono text-[0.6rem] uppercase tracking-[0.16em] text-white/55">
+                  Watch the walkthrough
+                </span>
+              ) : null}
+              <span
+                className={`block font-serif leading-snug text-white ${
+                  compact ? "text-lg" : "mt-1 text-xl"
+                }`}
+              >
                 {title}
               </span>
             </span>

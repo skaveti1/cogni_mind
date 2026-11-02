@@ -12,7 +12,7 @@ export function AppHeader({ onReset }: { onReset: () => void }) {
         <span className="hidden h-6 w-px bg-line-strong sm:block" />
         <div className="hidden sm:block">
           <p className="text-[0.86rem] font-medium leading-none text-ink">
-            HVAC Tech Support Copilot
+            HVAC Tech Support Agent
           </p>
           <p className="mt-0.5 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-muted">
             Technical Support Console

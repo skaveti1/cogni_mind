@@ -422,7 +422,7 @@ export const downstreamTools: DownstreamTool[] = [
   },
   {
     id: "procure",
-    name: "Procurement copilot",
+    name: "Procurement agent",
     blurb: "Compare like-for-like and buy the cheapest in-stock source.",
   },
   {

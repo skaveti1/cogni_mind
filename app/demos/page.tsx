@@ -41,7 +41,7 @@ export default function DemosPage() {
             </Reveal>
             <Reveal delay={80}>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-soft sm:text-lg">
-                Short walkthroughs of Cognimind agents inside real
+                Short walkthroughs of Cognimind AI agents inside real
                 manufacturing and distribution workflows. No slideware — just
                 the product, the inputs, and the output.
               </p>
@@ -50,7 +50,7 @@ export default function DemosPage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button href="#plm">Watch the PLM demo</Button>
                 <Button href="/#contact" variant="secondary">
-                  Talk to us
+                  Get in touch
                 </Button>
               </div>
             </Reveal>
@@ -132,7 +132,7 @@ export default function DemosPage() {
               href="/#contact"
               className="btn-shift inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-3 font-mono text-[0.72rem] font-medium uppercase tracking-[0.14em] text-forest transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-forest"
             >
-              Talk to us
+              Get in touch
               <svg
                 width="14"
                 height="14"

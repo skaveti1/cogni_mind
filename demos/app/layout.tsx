@@ -23,9 +23,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HVAC Tech Support Copilot · Cognimind Prototype",
+  title: "HVAC Tech Support Agent · Cognimind Prototype",
   description:
-    "Clickable prototype: an AI support copilot that loads manuals, runs concurrent searches, and troubleshoots HVAC faults.",
+    "Clickable prototype: an AI support agent that loads manuals, runs concurrent searches, and troubleshoots HVAC faults.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

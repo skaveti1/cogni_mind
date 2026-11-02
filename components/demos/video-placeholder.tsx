@@ -1,13 +1,13 @@
 export function VideoPlaceholder({ title }: { title: string }) {
   return (
-    <div className="relative flex aspect-[160/81] flex-col items-center justify-center overflow-hidden rounded-2xl border border-dashed border-line-strong bg-elevated/70 p-8 text-center">
+    <div className="relative flex aspect-[160/81] flex-col items-center justify-center overflow-hidden rounded-none border border-dashed border-line-strong bg-elevated/70 p-8 text-center">
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_0%,rgba(201,162,39,0.12),transparent_60%)]"
       />
 
       <div className="relative">
-        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-line-strong bg-surface text-muted">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-surface text-ink shadow-[0_8px_20px_rgba(26,24,21,0.12)] ring-1 ring-black/5">
           <svg
             width="20"
             height="20"

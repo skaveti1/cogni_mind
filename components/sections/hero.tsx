@@ -1,7 +1,10 @@
 import { Button, Scene } from "@/components/ui";
 import { Reveal } from "@/components/motion/reveal";
-import { TableMerge } from "@/components/graphics/table-merge";
+import { DemoVideoPlayer } from "@/components/demos/demo-video-player";
 import { hero } from "@/lib/content";
+import { demoVideos } from "@/lib/demo-videos";
+
+const qualityDemo = demoVideos.find((demo) => demo.slug === "quality-control");
 
 export function Hero() {
   return (
@@ -42,11 +45,25 @@ export function Hero() {
               ))}
             </div>
           </Reveal>
+
+          <Reveal delay={320}>
+            <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted lg:mx-0">
+              {hero.note}
+            </p>
+          </Reveal>
         </div>
 
-        <div className="mx-auto w-full max-w-[320px] lg:max-w-[380px]">
+        <div className="mx-auto w-full max-w-[420px] lg:max-w-[440px]">
           <Reveal direction="none">
-            <TableMerge />
+            {qualityDemo?.videoSrc ? (
+              <DemoVideoPlayer
+                src={qualityDemo.videoSrc}
+                title={qualityDemo.name}
+                duration={qualityDemo.duration}
+                poster={qualityDemo.poster}
+                compact
+              />
+            ) : null}
           </Reveal>
         </div>
       </div>

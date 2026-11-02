@@ -198,7 +198,7 @@ export function ContactForm() {
 
         <label className="block">
           <span className="mb-1.5 block text-xs font-medium text-ink-soft">
-            What are you looking to solve?
+            Tell us more about that workflow.
           </span>
           <textarea
             name="message"

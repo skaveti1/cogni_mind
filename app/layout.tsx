@@ -28,16 +28,15 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Cognimind — An AI for manufacturers and distributors that does the tasks you thought were impossible",
+    default: "Cognimind — AI agents for manufacturers and distributors",
     template: "%s · Cognimind",
   },
   description: site.description,
   keywords: [
-    "AI for manufacturers and distributors",
-    "AI co-worker",
+    "AI agents for manufacturers and distributors",
+    "AI agent",
     "warehouse automation",
     "workflow automation",
-    "AI agents",
     "AI implementation",
   ],
   alternates: { canonical: "/" },
@@ -45,13 +44,13 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: "Cognimind — An AI for manufacturers and distributors that does the tasks you thought were impossible",
+    title: "Cognimind — AI agents for manufacturers and distributors",
     description: site.description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cognimind — An AI for manufacturers and distributors that does the tasks you thought were impossible",
+    title: "Cognimind — AI agents for manufacturers and distributors",
     description: site.description,
   },
   robots: {
@@ -75,7 +74,7 @@ const organizationSchema = {
   url: site.url,
   description: site.description,
   email: site.email,
-  slogan: "It takes the busywork. The decisions stay with your team.",
+  slogan: "AI agents do the busywork. The decisions stay with your team.",
   areaServed: "Global",
   knowsAbout: [
     "AI implementation for manufacturing",

@@ -76,12 +76,6 @@ export function HowItWorks() {
             </div>
           ))}
         </Stagger>
-
-        <Reveal delay={80}>
-          <p className="mt-4 max-w-3xl border-t border-line pt-6 font-serif text-base italic leading-snug text-white/90">
-            {howItWorks.note}
-          </p>
-        </Reveal>
       </div>
     </Scene>
   );

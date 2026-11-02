@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Cognimind — An AI for manufacturers and distributors that does the tasks you thought were impossible";
+  "Cognimind — AI agents for manufacturers and distributors";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -59,11 +59,10 @@ export default function OpengraphImage() {
               letterSpacing: "-0.02em",
             }}
           >
-            An AI for manufacturers and distributors that does the tasks you
-            thought were impossible
+            AI agents for manufacturers and distributors
           </div>
           <div style={{ marginTop: 26, fontSize: 34, color: "#45413a" }}>
-            It takes the busywork. The decisions stay with your team.
+            The decisions stay with your team.
           </div>
         </div>
 

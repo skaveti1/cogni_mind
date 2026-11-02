@@ -12,9 +12,8 @@ export function SiteFooter() {
               <Brand className="text-white" markClassName="text-white" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/55">
-              AI co-workers for manufacturers and distributors. One workflow at
-              a time — the AI takes the busywork. The decisions stay with your
-              team.
+              AI agents for manufacturers and distributors. The decisions stay
+              with your team.
             </p>
           </div>
 
@@ -32,7 +31,7 @@ export function SiteFooter() {
               href="/#contact"
               className="text-sm text-white/65 transition-colors hover:text-white"
             >
-              Start a conversation
+              Start with one workflow
             </Link>
           </div>
         </div>
@@ -40,7 +39,7 @@ export function SiteFooter() {
         <div className="mt-12 flex flex-col gap-3 border-t border-forest-line pt-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Cognimind. All rights reserved.</p>
           <p className="font-mono uppercase tracking-[0.14em]">
-            Built for manufacturers who ship
+            Built for manufacturers and distributors
           </p>
         </div>
       </div>

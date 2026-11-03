@@ -158,7 +158,7 @@ function MiniGrid({ table }: { table: MiniTable }) {
 
 export function TableMerge() {
   return (
-    <div className="merge-layer relative aspect-[4/5] w-full overflow-hidden">
+    <div className="merge-layer theme-light relative aspect-[4/5] w-full overflow-hidden">
       {/* Swarm of messy source tables */}
       {MESSY.map((table, i) => (
         <div

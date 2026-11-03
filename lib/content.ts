@@ -161,6 +161,7 @@ export const whyUs = {
 
 export type Brand = {
   name: string;
+  label?: string | null;
   logo?: string;
   logoWhite?: string;
 };
@@ -175,11 +176,13 @@ export const brands = {
     { name: "Danaher", logo: "/logos/danaher.png", logoWhite: "/logos/white/danaher.png" },
     {
       name: "Liebherr Group",
+      label: null,
       logo: "/logos/liebherr.png",
       logoWhite: "/logos/white/liebherr.png",
     },
     {
       name: "Susquehanna International Group",
+      label: "SIG",
       logo: "/logos/susquehanna.png",
       logoWhite: "/logos/white/susquehanna.png",
     },
@@ -193,7 +196,6 @@ export const contact = {
   title: "Let's start with one workflow.",
   body: "No commitment. No deck at the end.",
   emailLabel: "Or email us directly",
-  formTitle: "Which workflow hurts most?",
-  formSubtitle: "Tell us where the work slows down — we'll take it from there.",
+  messageLabel: "Which workflow hurts most?",
   note: "We respond within 24 hours · No spam, ever.",
 };

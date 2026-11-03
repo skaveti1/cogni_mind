@@ -8,8 +8,8 @@ const qualityDemo = demoVideos.find((demo) => demo.slug === "quality-control");
 
 export function Hero() {
   return (
-    <Scene id="top" tone="solid" className="scene-hero">
-      <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+    <Scene id="home" tone="solid" className="scene-hero">
+      <div className="grid items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-6">
         <div className="text-center lg:text-left">
           <Reveal direction="none">
             <p className="font-sans text-base font-bold uppercase tracking-[0.04em] text-gold sm:text-lg md:text-xl">
@@ -53,7 +53,7 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <div className="mx-auto w-full max-w-[420px] lg:max-w-[440px]">
+        <div className="mx-auto w-full max-w-[546px] lg:max-w-[572px]">
           <Reveal direction="none">
             {qualityDemo?.videoSrc ? (
               <DemoVideoPlayer
@@ -62,6 +62,7 @@ export function Hero() {
                 duration={qualityDemo.duration}
                 poster={qualityDemo.poster}
                 compact
+                playOnView
               />
             ) : null}
           </Reveal>

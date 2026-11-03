@@ -4,11 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Brand } from "@/components/brand";
+import { ScrambleText } from "@/components/motion/scramble-text";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { nav } from "@/lib/site";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState<number | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export function SiteHeader() {
       <ScrollProgress />
       <div className="mx-auto flex h-[68px] w-full max-w-6xl items-center justify-between gap-6 px-6 md:px-8">
         <Link
-          href="/#top"
+          href="/#home"
           aria-label="Cognimind home"
           onClick={() => setOpen(false)}
         >
@@ -34,22 +36,31 @@ export function SiteHeader() {
           className="hidden items-center gap-5 lg:flex lg:gap-7"
           aria-label="Primary"
         >
-          {nav.map((item) => {
-            const active = item.href === "/demos" && pathname === item.href;
+          {nav.map((item, index) => {
+            const current = item.href === "/demos" && pathname === item.href;
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                aria-current={active ? "page" : undefined}
+                aria-label={item.label}
+                aria-current={current ? "page" : undefined}
+                onMouseEnter={() => setActiveNav(index)}
+                onMouseLeave={() =>
+                  setActiveNav((active) => (active === index ? null : active))
+                }
+                onFocus={() => setActiveNav(index)}
+                onBlur={() =>
+                  setActiveNav((active) => (active === index ? null : active))
+                }
                 className={`nav-link font-mono text-[0.72rem] uppercase tracking-[0.12em] transition-colors ${
                   item.highlight
                     ? "nav-link-highlight text-amber hover:text-ink"
                     : "text-muted hover:text-ink"
                 }`}
               >
-                {item.label}
-                {active ? (
+                <ScrambleText text={item.label} active={activeNav === index} />
+                {current ? (
                   <span
                     aria-hidden="true"
                     className="ml-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gold align-middle"

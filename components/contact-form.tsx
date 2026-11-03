@@ -127,12 +127,7 @@ export function ContactForm() {
 
   return (
     <div className="rounded-2xl border border-line bg-surface p-8 shadow-[0_1px_2px_rgba(26,24,21,0.04),0_18px_40px_-24px_rgba(26,24,21,0.22)]">
-      <h3 className="font-serif text-2xl text-ink">{contact.formTitle}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted">
-        {contact.formSubtitle}
-      </p>
-
-      <form onSubmit={handleSubmit} className="mt-7 space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block">
             <span className="mb-1.5 block text-xs font-medium text-ink-soft">
@@ -197,8 +192,8 @@ export function ContactForm() {
         </div>
 
         <label className="block">
-          <span className="mb-1.5 block text-xs font-medium text-ink-soft">
-            Tell us more about that workflow.
+          <span className="mb-2 block text-sm font-medium text-ink-soft">
+            {contact.messageLabel}
           </span>
           <textarea
             name="message"

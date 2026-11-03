@@ -36,14 +36,11 @@ export function DemoSection({
       <div
         className={`order-1 ${flip ? "lg:order-1" : "lg:order-2"}`}
       >
-        <div className="flex items-center gap-3">
-          <span className="inline-flex h-7 min-w-[1.75rem] items-center justify-center rounded-full border border-line-strong px-2 font-mono text-[0.65rem] tracking-[0.1em] text-ink-soft">
-            {String(index + 1).padStart(2, "0")}
-          </span>
+        {!isLive ? (
           <span className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-accent">
-            {isLive ? "Watch the demo" : "Coming soon"}
+            Coming soon
           </span>
-        </div>
+        ) : null}
 
         <h2 className="mt-4 font-serif text-[1.75rem] leading-[1.12] tracking-[-0.01em] text-ink sm:text-3xl">
           {demo.name}

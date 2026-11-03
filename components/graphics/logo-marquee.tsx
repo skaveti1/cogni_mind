@@ -14,34 +14,41 @@ function Row({
 }) {
   return (
     <ul className="marquee-list" data-copy={copy} aria-hidden={copy === 1}>
-      {brands.map((brand) => (
-        <li key={brand.name} className="marquee-item">
-          {brand.logo ? (
-            <Image
-              src={
-                tone === "onDark"
-                  ? brand.logoWhite ?? brand.logo
-                  : brand.logo
-              }
-              alt=""
-              width={80}
-              height={32}
-              className="h-8 w-auto max-w-[10rem] object-contain"
-            />
-          ) : (
-            <span className="marquee-mono" aria-hidden="true">
-              {brand.name.slice(0, 2).toUpperCase()}
-            </span>
-          )}
-          <span
-            className={`font-mono text-sm uppercase tracking-[0.14em] ${
-              tone === "onDark" ? "text-white/75" : "text-ink-soft"
-            }`}
-          >
-            {brand.name}
-          </span>
-        </li>
-      ))}
+      {brands.map((brand) => {
+        const label =
+          brand.label === undefined ? brand.name : brand.label;
+
+        return (
+          <li key={brand.name} className="marquee-item">
+            {brand.logo ? (
+              <Image
+                src={
+                  tone === "onDark"
+                    ? brand.logoWhite ?? brand.logo
+                    : brand.logo
+                }
+                alt=""
+                width={80}
+                height={32}
+                className="h-8 w-auto max-w-[10rem] object-contain"
+              />
+            ) : (
+              <span className="marquee-mono" aria-hidden="true">
+                {brand.name.slice(0, 2).toUpperCase()}
+              </span>
+            )}
+            {label ? (
+              <span
+                className={`font-mono text-sm uppercase tracking-[0.14em] ${
+                  tone === "onDark" ? "text-white/75" : "text-ink-soft"
+                }`}
+              >
+                {label}
+              </span>
+            ) : null}
+          </li>
+        );
+      })}
     </ul>
   );
 }

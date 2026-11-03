@@ -571,6 +571,25 @@ body {
 .nav-link {
   position: relative;
 }
+.nav-flap {
+  perspective: 140px;
+}
+.nav-flap-char {
+  display: inline-block;
+  transform-origin: 50% 70%;
+  animation: nav-flap-in 120ms var(--ease-out-soft) both;
+  will-change: transform, opacity;
+}
+@keyframes nav-flap-in {
+  from {
+    opacity: 0.55;
+    transform: translateY(-0.24em) rotateX(-72deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
 .nav-link::after {
   content: "";
   position: absolute;
@@ -653,6 +672,9 @@ body {
     animation: none !important;
   }
   .merge-float {
+    animation: none !important;
+  }
+  .nav-flap-char {
     animation: none !important;
   }
   .replay-row,

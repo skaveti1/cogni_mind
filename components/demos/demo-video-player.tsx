@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export function DemoVideoPlayer({
   src,
@@ -9,6 +10,7 @@ export function DemoVideoPlayer({
   poster,
   captions,
   compact = false,
+  playOnView = false,
 }: {
   src: string;
   title: string;
@@ -16,19 +18,54 @@ export function DemoVideoPlayer({
   poster?: string;
   captions?: string;
   compact?: boolean;
+  playOnView?: boolean;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
+  const [autoplayFailed, setAutoplayFailed] = useState(false);
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (!playOnView || reducedMotion) return;
+
+    const container = containerRef.current;
+    const video = videoRef.current;
+    if (!container || !video) return;
+
+    let cancelled = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        video.muted = true;
+        video.play().catch(() => {
+          if (!cancelled) setAutoplayFailed(true);
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    observer.observe(container);
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+    };
+  }, [playOnView, reducedMotion]);
 
   const start = () => {
     setStarted(true);
     videoRef.current?.play().catch(() => {
-      // If autoplay is blocked, the native controls are still available.
+      // If playback is blocked, the native controls are still available.
     });
   };
 
+  const showOverlay =
+    !started && (!playOnView || reducedMotion || autoplayFailed);
+
   return (
     <div
+      ref={containerRef}
       className={`relative overflow-hidden rounded-none bg-forest shadow-[0_24px_50px_-32px_rgba(26,24,21,0.35)] ${
         compact ? "aspect-[16/9]" : "aspect-[160/81]"
       }`}
@@ -37,9 +74,11 @@ export function DemoVideoPlayer({
         ref={videoRef}
         src={src}
         poster={poster}
-        preload="none"
+        preload={playOnView ? "metadata" : "none"}
         playsInline
+        muted={playOnView}
         controls={started}
+        onPlay={() => setStarted(true)}
         aria-label={`${title} walkthrough`}
         className="h-full w-full bg-forest object-cover"
       >
@@ -53,7 +92,7 @@ export function DemoVideoPlayer({
         ) : null}
       </video>
 
-      {!started ? (
+      {showOverlay ? (
         <button
           type="button"
           onClick={start}

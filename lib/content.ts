@@ -10,15 +10,6 @@ export const hero = {
   ],
 };
 
-export const receiving = {
-  eyebrow: "A day in the life of a receiving clerk",
-  title: "See how the AI agent helps.",
-  body: "A truck arrives. The AI agent checks every line against the order before it leaves the dock.",
-  image: "/screenshots/table_dashboard.png",
-  imageAlt:
-    "Example receiving dashboard showing a delivery from Northside Supply against PO-4418, with lines that match the order and two flagged for the team to review.",
-};
-
 export const howItWorks = {
   eyebrow: "How it works",
   title: "One workflow at a time. You see working software every week.",
